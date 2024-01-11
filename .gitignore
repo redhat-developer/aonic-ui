@@ -128,3 +128,16 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+.DS_Store
+node_modules
+.turbo
+*.log
+.next
+dist
+dist-ssr
+*.local
+.env
+.cache
+server/dist
+public/dist
+storybook-static/

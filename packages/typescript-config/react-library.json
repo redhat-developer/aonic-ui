@@ -6,6 +6,11 @@
     "jsx": "react-jsx",
     "lib": ["dom", "ES2015"],
     "module": "ESNext",
-    "target": "es6"
+    "resolveJsonModule": true,
+    "target": "es5",
+    "sourceMap": true,
+    "outDir": "dist",
+    "allowSyntheticDefaultImports": true,
+    "emitDeclarationOnly": true
   }
 }

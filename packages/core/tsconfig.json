@@ -1,0 +1,8 @@
+{
+  "extends": "@aonic-ui/typescript-config/react-library.json",
+  "compilerOptions": {
+    "declarationDir": "types",
+  },
+  "include": ["."],
+  "exclude": ["dist", "build", "node_modules"]
+}

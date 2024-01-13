@@ -1,5 +1,27 @@
 {
+  "name": "aonic-ui",
+  "version": "0.0.0",
+  "description": "A common library for Developer UI components and utilities.",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redhat-developer/aonic-ui.git"
+  },
+  "keywords": [
+    "React",
+    "Typescript",
+    "Component",
+    "Library",
+    "Developer",
+    "Tools",
+    "Aonic"
+  ],
+  "author": "Rohit Rai",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/redhat-developer/aonic-ui/issues"
+  },
+  "homepage": "https://github.com/redhat-developer/aonic-ui#readme",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
@@ -17,7 +39,7 @@
   },
   "packageManager": "yarn@1.22.21",
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "packages/*",
+    "docs"
   ]
 }

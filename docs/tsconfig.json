@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/typescript-config/react-library.json",
+  "extends": "@aonic-ui/typescript-config/react-app.json",
   "include": ["."],
   "exclude": ["dist", "build", "node_modules"]
 }

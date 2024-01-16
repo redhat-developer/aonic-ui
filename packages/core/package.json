@@ -4,6 +4,7 @@
   "description": "Core components and utils for aonic-ui library.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "sideEffects": false,
   "files": [
     "dist"
   ],

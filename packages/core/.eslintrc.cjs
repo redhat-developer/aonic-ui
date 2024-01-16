@@ -1,4 +1,4 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  extends: ["@aonic-ui/eslint-config/react.js"],
+  extends: ["@aonic-ui/eslint-config/library.js"],
 };

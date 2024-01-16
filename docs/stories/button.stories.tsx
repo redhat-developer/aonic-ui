@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "@aonic-ui/core";
+import { Button } from '@aonic-ui/core/src';
+import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof Button> = {
   component: Button,
@@ -21,12 +21,12 @@ export const Primary: Story = {
       label="Hello"
       onClick={(): void => {
         // eslint-disable-next-line no-alert -- alert for demo
-        alert("Hello from Turborepo!");
+        alert('Hello from Turborepo!');
       }}
     />
   ),
-  name: "Button",
+  name: 'Button',
   args: {
-    label: "Hello",
+    label: 'Hello',
   },
 };

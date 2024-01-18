@@ -37,7 +37,7 @@ module.exports = {
       },
     },
   },
-  ignorePatterns: ["node_modules/", "dist/"],
+  ignorePatterns: ["node_modules/", "dist/", "storybook-static"],
   // add rules configurations here
   rules: {
     "import/no-default-export": "off",

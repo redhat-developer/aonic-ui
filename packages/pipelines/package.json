@@ -1,7 +1,7 @@
 {
-  "name": "@aonic-ui/core",
+  "name": "@aonic-ui/pipelines",
   "version": "0.0.0",
-  "description": "Core components and utils for aonic-ui library.",
+  "description": "The common library for all the components and utils related to Pipelines.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "sideEffects": false,
@@ -23,13 +23,9 @@
     "url": "git+https://github.com/redhat-developer/aonic-ui.git"
   },
   "keywords": [
-    "React",
-    "Typescript",
-    "Component",
-    "Library",
-    "Developer",
-    "Tools",
-    "Aonic"
+    "Pipelines",
+    "Tekton",
+    "Developer"
   ],
   "author": "Rohit Rai",
   "license": "Apache-2.0",

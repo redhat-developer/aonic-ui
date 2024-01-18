@@ -39,7 +39,7 @@ module.exports = {
     "react-hooks",
     "@typescript-eslint",
     "prettier",
-    // "only-warn",
+    "only-warn",
   ],
   rules: {
     camelcase: [

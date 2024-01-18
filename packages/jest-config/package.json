@@ -1,0 +1,15 @@
+{
+  "name": "@aonic-ui/jest-config",
+  "version": "0.0.0",
+  "description": "Jest configuration shared across all the packages in @aonic-ui",
+  "private": true,
+  "devDependencies": {
+    "@babel/core": "^7.23.7",
+    "@babel/preset-env": "^7.23.8",
+    "@babel/preset-react": "^7.23.3",
+    "@babel/preset-typescript": "^7.23.3",
+    "babel-jest": "^29.7.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest-environment-jsdom": "^29.7.0"
+  }
+}

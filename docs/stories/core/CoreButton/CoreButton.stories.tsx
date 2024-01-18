@@ -25,7 +25,7 @@ export const Primary: Story = {
       }}
     />
   ),
-  name: 'Button',
+  name: 'Core Button',
   args: {
     label: 'Hello',
   },

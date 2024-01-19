@@ -1,6 +1,6 @@
-const { resolve } = require("node:path");
+const { resolve } = require('node:path');
 
-const project = resolve(process.cwd(), "tsconfig.json");
+const project = resolve(process.cwd(), 'tsconfig.json');
 
 /*
  * This is a custom ESLint configuration for use with
@@ -13,33 +13,33 @@ const project = resolve(process.cwd(), "tsconfig.json");
 
 module.exports = {
   extends: [
-    "plugin:storybook/recommended",
-    "plugin:mdx/recommended",
+    'plugin:storybook/recommended',
+    'plugin:mdx/recommended',
     ...[
-      "@vercel/style-guide/eslint/node",
-      "@vercel/style-guide/eslint/typescript",
-      "@vercel/style-guide/eslint/browser",
-      "@vercel/style-guide/eslint/react",
+      '@vercel/style-guide/eslint/node',
+      '@vercel/style-guide/eslint/typescript',
+      '@vercel/style-guide/eslint/browser',
+      '@vercel/style-guide/eslint/react',
     ].map(require.resolve),
   ],
   parserOptions: {
     project,
   },
-  plugins: ["only-warn"],
+  plugins: ['only-warn'],
   globals: {
     React: true,
     JSX: true,
   },
   settings: {
-    "import/resolver": {
+    'import/resolver': {
       typescript: {
         project,
       },
     },
   },
-  ignorePatterns: ["node_modules/", "dist/", "storybook-static"],
+  ignorePatterns: ['node_modules/', 'dist/', 'storybook-static'],
   // add rules configurations here
   rules: {
-    "import/no-default-export": "off",
+    'import/no-default-export': 'off',
   },
 };

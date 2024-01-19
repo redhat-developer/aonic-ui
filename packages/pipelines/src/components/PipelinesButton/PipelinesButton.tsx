@@ -7,7 +7,9 @@ export interface PipelinesButtonProps {
   onClick?: () => void;
 }
 
-const PipelinesButton: React.FunctionComponent<PipelinesButtonProps> = (props: PipelinesButtonProps) => {
+const PipelinesButton: React.FunctionComponent<PipelinesButtonProps> = (
+  props: PipelinesButtonProps,
+) => {
   return (
     <button className="aonic-button" onClick={props.onClick}>
       {props.label} Pipelines Button

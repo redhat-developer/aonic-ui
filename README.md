@@ -1,6 +1,6 @@
 # Aonic UI
-A common library for Developer UI components and utilities.
 
+A common library for Developer UI components and utilities.
 
 ### Useful Commands
 
@@ -123,4 +123,3 @@ This example includes a few helpful Storybook scripts:
 - `yarn dev`: Starts Storybook in dev mode with hot reloading at `localhost:6006`
 - `yarn build`: Builds the Storybook UI and generates the static HTML files
 - `yarn preview-storybook`: Starts a local server to view the generated Storybook UI
-

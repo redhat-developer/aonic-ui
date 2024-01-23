@@ -4,9 +4,11 @@ import {
   DescriptionListDescription,
   DescriptionListGroup,
   DescriptionListTerm,
+  Icon,
   Timestamp,
   Truncate,
 } from '@patternfly/react-core';
+import { GlobeAmericasIcon } from '@patternfly/react-icons/dist/js/icons/globe-americas-icon';
 import { ExpandableRowContent, Tbody, Td, Tr } from '@patternfly/react-table';
 import { EnterpriseContractPolicy } from '../../types';
 import { getRuleStatus } from '../../utils/summary-utils';
@@ -68,7 +70,15 @@ export const EnterpriseContractRow: React.FC<EnterpriseContractRowType> = ({ dat
                 <DescriptionListGroup>
                   <DescriptionListTerm>Effective from</DescriptionListTerm>
                   <DescriptionListDescription>
-                    <Timestamp>{data.timestamp}</Timestamp>
+                    <Icon iconSize="sm">
+                      <GlobeAmericasIcon />
+                    </Icon>{' '}
+                    <Timestamp
+                      date={new Date(data.timestamp)}
+                      dateFormat="medium"
+                      timeFormat="short"
+                      is12Hour
+                    />
                   </DescriptionListDescription>
                 </DescriptionListGroup>
               ) : null}

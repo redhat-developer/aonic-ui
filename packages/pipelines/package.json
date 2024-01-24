@@ -1,6 +1,6 @@
 {
   "name": "@aonic-ui/pipelines",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "The common library for all the components and utils related to Pipelines.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -58,7 +58,6 @@
     "@patternfly/react-icons": "^5.1.2",
     "@patternfly/react-table": "^5.1.2",
     "@patternfly/react-tokens": "^5.1.2"
-
   },
   "publishConfig": {
     "access": "public"

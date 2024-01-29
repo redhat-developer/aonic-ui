@@ -33,6 +33,9 @@
     "url": "https://github.com/redhat-developer/aonic-ui/issues"
   },
   "homepage": "https://github.com/redhat-developer/aonic-ui#readme",
+  "dependencies": {
+    "@patternfly/react-table": "^5.1.2"
+  },
   "devDependencies": {
     "@aonic-ui/eslint-config": "*",
     "@aonic-ui/jest-config": "*",
@@ -42,7 +45,6 @@
     "@testing-library/jest-dom": "^6.2.0",
     "@patternfly/react-core": "^5.1.2",
     "@patternfly/react-icons": "^5.1.2",
-    "@patternfly/react-table": "^5.1.2",
     "@patternfly/react-tokens": "^5.1.2",
     "@types/jest": "^29.5.11",
     "@types/react": "^18.2.47",

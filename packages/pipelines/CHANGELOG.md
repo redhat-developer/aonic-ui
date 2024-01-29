@@ -1,5 +1,12 @@
 # @aonic-ui/pipelines
 
+## 1.0.1
+
+### Patch Changes
+
+- 987b97a: Update react-table from devDependancies to dependancies
+  export the output component types
+
 ## 1.0.0
 
 ### Major Changes

@@ -1,7 +1,7 @@
 // Enterprise constract types and enums.
 
 import { TektonResultsRun } from '../../types/coreTekton';
-import { TaskRunKind, V1Pod } from '../../types/taskrun';
+import { TaskRunKind } from '../../types/taskrun';
 import { RunStatus } from '../../utils/pipelinerun-utils';
 
 export enum ENTERPRISE_CONTRACT_POLICY_STATUS {
@@ -208,13 +208,12 @@ export enum TaskType {
 export type OutputGroup = {
   [key in TaskType]?: {
     taskRun: TaskRunKind | undefined;
-    pod: V1Pod | undefined;
     loading: boolean;
     data: string | object | any;
   };
 } & {
+  status: RunStatus;
   results: {
-    status: RunStatus | null;
     loading: boolean;
     data: TektonResultsRun[] | [];
   };
@@ -223,4 +222,3 @@ export type OutputGroup = {
 export type OutputTaskRunGroup = {
   [key in `${TaskType}TaskRun`]?: TaskRunKind;
 };
-export type OutputPodGroup = { [key in `${TaskType}Pod`]?: V1Pod };

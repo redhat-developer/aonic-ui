@@ -1,5 +1,6 @@
 import { Bullseye, EmptyState, EmptyStateBody, EmptyStateVariant } from '@patternfly/react-core';
 import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
+import { RunStatus } from '../../../../utils/pipelinerun-utils';
 import { handleURLs } from './HandleUrls';
 
 export interface ResultsListProps {
@@ -8,7 +9,7 @@ export interface ResultsListProps {
     value: string;
   }[];
   pipelineRunName: string;
-  pipelineRunStatus: string;
+  pipelineRunStatus: RunStatus;
 }
 
 const ResultsList: React.FC<ResultsListProps> = ({

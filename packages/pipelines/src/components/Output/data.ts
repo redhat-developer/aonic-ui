@@ -163,6 +163,20 @@ export const mockEnterpriseContractJSON: EnterpriseContractResult = {
           msg: 'CVE scan results not found',
         },
       ],
+      warnings: [
+        {
+          metadata: {
+            code: 'cve.missing_cve_scan_results',
+            collections: ['minimal'],
+            description:
+              'The clair-scan task results have not been found in the SLSA Provenance attestation of the build pipeline.',
+            ['effective_on']: '2022-01-01T00:00:00Z',
+            title: 'Missing CVE scan results',
+            solution: 'solution for failure',
+          },
+          msg: 'CVE scan results not found',
+        },
+      ],
     },
   ],
   key: '-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEWVUppvU1x8t866CQQSXbKpojoaTq\nimMnVnZ31e2ubZHKL1LdfgPG2gHIPeSeouTa8upOz9W+xxBFnA0X515Nsw==\n-----END PUBLIC KEY-----\n',

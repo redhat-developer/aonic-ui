@@ -9,13 +9,13 @@ import {
   FlexItem,
 } from '@patternfly/react-core';
 
-type OutputTabCardProps = {
+type OutputCardProps = {
   title: string;
   isOpen?: boolean;
   badge?: React.ReactNode;
   children: React.ReactNode;
 };
-const OutputTabCard: React.FC<OutputTabCardProps> = ({ title, badge, isOpen, children }) => {
+const OutputCard: React.FC<OutputCardProps> = ({ title, badge, isOpen, children }) => {
   const [tabOpen, setTabOpen] = React.useState<boolean>(isOpen ?? false);
   const id = title?.replace(/\//g, '-')?.toLowerCase();
 
@@ -44,4 +44,4 @@ const OutputTabCard: React.FC<OutputTabCardProps> = ({ title, badge, isOpen, chi
     </Card>
   );
 };
-export default OutputTabCard;
+export default OutputCard;

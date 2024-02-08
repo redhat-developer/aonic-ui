@@ -2,7 +2,7 @@ import { TektonResourceLabel, TektonResultsRun } from '../types/coreTekton';
 import { PipelineTask } from '../types/pipeline';
 import { PipelineRunKind, Condition } from '../types/pipelinerun';
 import { TaskRunKind } from '../types/taskrun';
-import { RunStatus, SucceedConditionReason } from '../utils/pipelinerun-utils';
+import { RunStatus, SucceedConditionReason } from './pipelinerun-utils';
 
 const samplePipelineRun: PipelineRunKind = {
   apiVersion: 'tekton.dev/v1',

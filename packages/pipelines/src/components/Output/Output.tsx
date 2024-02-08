@@ -20,7 +20,7 @@ export type OutputProps = {
 /**
  * Output component supports EC, ACS policy reports and pipelinerun results.
  * @param OutputProps
- * @returns
+ * @returns React.ReactNode
  */
 const Output: React.FC<OutputProps> = ({
   enterpriseContractPolicies = [],

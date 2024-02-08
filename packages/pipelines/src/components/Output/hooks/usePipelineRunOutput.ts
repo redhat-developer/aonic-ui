@@ -1,3 +1,4 @@
+import React from 'react';
 import { TektonResultsRun } from '../../../types/coreTekton';
 import { PipelineRunKind } from '../../../types/pipelinerun';
 import { TaskRunKind } from '../../../types/taskrun';
@@ -15,6 +16,13 @@ import {
 } from '../utils/data-transformer-utils';
 import { usePodContainerLogs } from './usePodContainerLogs';
 
+/**
+ * Returns the data needed to pass into the Output component
+ * @param pipelineRun
+ * @param taskRuns
+ * @param getLogs
+ * @returns OutputGroup
+ */
 export const usePipelineRunOutput = (
   pipelineRun: PipelineRunKind,
   taskRuns: TaskRunKind[],
@@ -53,33 +61,54 @@ export const usePipelineRunOutput = (
   const ecData = mapEnterpriseContractResultData(
     formatData(ecTaskFormat, ecValue ?? ([] as any)) as EnterpriseContractResult,
   );
+  const status = pipelineRunStatus(pipelineRun);
+  const results = ((pipelineRun?.status?.pipelineResults || pipelineRun?.status?.results) ??
+    []) as TektonResultsRun[];
 
-  return {
-    status: pipelineRunStatus(pipelineRun),
-    results: {
-      loading: pipelineRunStatus(pipelineRun) !== RunStatus.Succeeded,
-      data: ((pipelineRun?.status?.pipelineResults || pipelineRun?.status?.results) ??
-        []) as TektonResultsRun[],
-    },
-    ec: {
-      data: ecData,
-      loading: ecLoading,
-      taskRun: ecTaskRun,
-    },
-    acsImageScan: {
-      data: acsImageScanData,
-      loading: acsImageScanLoading,
-      taskRun: acsImageScanTaskRun,
-    },
-    acsImageCheck: {
-      data: acsImageCheckData,
-      loading: acsImageCheckLoading,
-      taskRun: acsImageCheckTaskRun,
-    },
-    acsDeploymentCheck: {
-      data: acsDeploymentCheckData,
-      loading: acsDeploymentCheckLoading,
-      taskRun: acsDeploymentCheckTaskRun,
-    },
-  };
+  return React.useMemo(
+    () => ({
+      status,
+      results: {
+        loading: status !== RunStatus.Succeeded,
+        data: results,
+      },
+      ec: {
+        data: ecData,
+        loading: ecLoading,
+        taskRun: ecTaskRun,
+      },
+      acsImageScan: {
+        data: acsImageScanData,
+        loading: acsImageScanLoading,
+        taskRun: acsImageScanTaskRun,
+      },
+      acsImageCheck: {
+        data: acsImageCheckData,
+        loading: acsImageCheckLoading,
+        taskRun: acsImageCheckTaskRun,
+      },
+      acsDeploymentCheck: {
+        data: acsDeploymentCheckData,
+        loading: acsDeploymentCheckLoading,
+        taskRun: acsDeploymentCheckTaskRun,
+      },
+    }),
+    [
+      status,
+      ecData,
+      results,
+      ecTaskRun,
+      ecLoading,
+      pipelineRun,
+      acsImageScanData,
+      acsImageScanLoading,
+      acsImageScanTaskRun,
+      acsImageCheckData,
+      acsImageCheckLoading,
+      acsImageCheckTaskRun,
+      acsDeploymentCheckData,
+      acsDeploymentCheckLoading,
+      acsDeploymentCheckTaskRun,
+    ],
+  );
 };

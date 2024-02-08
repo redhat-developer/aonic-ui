@@ -1,11 +1,16 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
+import { RunStatus } from '../../../../../utils/pipelinerun-utils';
 import ResultsList from '../ResultsList';
 
 describe('ResultsList', () => {
   test('should return null', () => {
     render(
-      <ResultsList results={[]} pipelineRunName="pipelinerun-1" pipelineRunStatus="Succeeded" />,
+      <ResultsList
+        results={[]}
+        pipelineRunName="pipelinerun-1"
+        pipelineRunStatus={RunStatus.Succeeded}
+      />,
     );
     expect(screen.queryByTestId('results-table')).not.toBeInTheDocument();
   });
@@ -15,7 +20,7 @@ describe('ResultsList', () => {
       <ResultsList
         results={[{ name: 'test', value: 'value' }]}
         pipelineRunName="pipelinerun-1"
-        pipelineRunStatus="Succeeded"
+        pipelineRunStatus={RunStatus.Succeeded}
       />,
     );
     expect(screen.queryByTestId('results-table')).toBeInTheDocument();
@@ -26,7 +31,7 @@ describe('ResultsList', () => {
       <ResultsList
         results={[{ name: 'test', value: 'https://www.test.com' }]}
         pipelineRunName="pipelinerun-1"
-        pipelineRunStatus="Succeeded"
+        pipelineRunStatus={RunStatus.Succeeded}
       />,
     );
     screen.getByRole('link', { name: 'result link' });
@@ -37,7 +42,7 @@ describe('ResultsList', () => {
       <ResultsList
         results={[{ name: 'test', value: 'https://www.test.com' }]}
         pipelineRunName="pipelinerun-1"
-        pipelineRunStatus="Failed"
+        pipelineRunStatus={RunStatus.Failed}
       />,
     );
     screen.getByText('pipelinerun-1 results not available due to failure');

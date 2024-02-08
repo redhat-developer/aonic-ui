@@ -18,13 +18,43 @@ npm install @aonic-ui/pipelines
 ### Usage
 
 
+Basic
 ```bash
-import { OutputTab } from '@aonic-ui/pipelines';
+import { Output, usePipelineRunOutput } from '@aonic-ui/pipelines';
 
-// Example usage of OutputTab component
+// Example usage of Output component
 
-<OutputTab 
+<Output
   pipelineRunName="pipelineRunName"
   pipelineRunStatus="Succeeded"
   results={[{name: 'result-1',value: 'value'}]}/>
+```
+
+Using helper functions
+```bash
+import { Output, usePipelineRunOutput } from '@aonic-ui/pipelines';
+
+  const output = usePipelineRunOutput(
+    mockData.pipelineRun as PipelineRunKind,
+    mockData.taskRuns,
+    getLogs);
+  
+  const getLogs = (podName, containerName): Promise<string> => {
+
+    // fetching the pod logs code goes here.
+
+    return Promise.resolve('logs...')
+  }
+
+  return (
+  <Output
+  results={output.results.data}
+  pipelineRunName="pipelineRunName"
+  pipelineRunStatus={output.status}
+  enterpriseContractPolicies={output.ec?.data}
+  acsImageScanResult={output.acsImageScan?.data}
+  acsImageCheckResults={output.acsImageCheck?.data}
+  acsDeploymentCheckResults={output.acsDeploymentCheck?.data}
+  />
+  )
 ```

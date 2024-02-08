@@ -1,6 +1,6 @@
 import { PipelineRunKind } from '../types/pipelinerun';
+import { createPipelineRunData, mockPipelineRunConfig } from '../utils/data-utils';
 import { RunStatus, SucceedConditionReason } from '../utils/pipelinerun-utils';
-import { mockPipelineRunConfig, createPipelineRunData } from './data-utils';
 
 const pipelineRunConfig: mockPipelineRunConfig = {
   name: 'test',

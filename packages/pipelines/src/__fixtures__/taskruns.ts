@@ -1,5 +1,5 @@
+import { createPipelineRunData, mockPipelineRunConfig } from '../utils/data-utils';
 import { RunStatus } from '../utils/pipelinerun-utils';
-import { mockPipelineRunConfig, createPipelineRunData } from './data-utils';
 
 const pipelineRunConfig: mockPipelineRunConfig = {
   name: 'test-plr',

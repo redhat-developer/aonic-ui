@@ -1,5 +1,9 @@
 // Enterprise constract types and enums.
 
+import { TektonResultsRun } from '../../types/coreTekton';
+import { TaskRunKind, V1Pod } from '../../types/taskrun';
+import { RunStatus } from '../../utils/pipelinerun-utils';
+
 export enum ENTERPRISE_CONTRACT_POLICY_STATUS {
   failed = 'Failed',
   successes = 'Success',
@@ -160,3 +164,63 @@ export interface ACSCheckResults {
   results: Result[];
   summary: ACSImageCheckSummary;
 }
+
+export enum TaskRunResultsAnnotations {
+  KEY = 'task.results.key',
+  TYPE = 'task.results.type',
+  LOCATION = 'task.results.location',
+  CONTAINER = 'task.results.container',
+  FORMAT = 'task.results.format',
+}
+
+export enum TaskRunResultsTypeValue {
+  EC = 'ec',
+  EXTERNAL_LINK = 'external-link',
+  ROXCTL_IMAGE_SCAN = 'roxctl-image-scan',
+  ROXCTL_IMAGE_CHECK = 'roxctl-image-check',
+  ROXCTL_DEPLOYMENT_CHECK = 'roxctl-deployment-check',
+}
+
+export enum TaskRunResultsFormatValue {
+  JSON = 'application/json',
+  YAML = 'application/yaml',
+  TEXT = 'application/text',
+}
+
+export enum TaskRunResultsLocationValue {
+  LOGS = 'logs',
+  RESULTS = 'results',
+}
+
+export enum TaskRunResultsKeyValue {
+  SBOM = 'LINK_TO_SBOM',
+  SCAN_OUTPUT = 'SCAN_OUTPUT',
+}
+
+export enum TaskType {
+  sbom = 'sbom',
+  ec = 'ec',
+  acsImageScan = 'acsImageScan',
+  acsImageCheck = 'acsImageCheck',
+  acsDeploymentCheck = 'acsDeploymentCheck',
+}
+
+export type OutputGroup = {
+  [key in TaskType]?: {
+    taskRun: TaskRunKind | undefined;
+    pod: V1Pod | undefined;
+    loading: boolean;
+    data: string | object | any;
+  };
+} & {
+  results: {
+    status: RunStatus | null;
+    loading: boolean;
+    data: TektonResultsRun[] | [];
+  };
+};
+
+export type OutputTaskRunGroup = {
+  [key in `${TaskType}TaskRun`]?: TaskRunKind;
+};
+export type OutputPodGroup = { [key in `${TaskType}Pod`]?: V1Pod };

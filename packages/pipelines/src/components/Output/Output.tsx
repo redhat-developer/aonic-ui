@@ -1,5 +1,5 @@
 import * as React from 'react';
-import OutputTabCard from './OutputTabCard';
+import OutputCard from './OutputCard';
 import AdvancedClusterSecurity from './Tabs/AdvancedClusterSecurity/AdvancedClusterSecurity';
 import EnterpriseContract from './Tabs/EnterpriseContract/EnterpriseContract';
 import ResultsList, { ResultsListProps } from './Tabs/Others/ResultsList';
@@ -10,14 +10,19 @@ import { getEnterpriseContractStatus } from './utils/ec-utils';
 import { isEmpty } from './utils/helper-utils';
 import { getACStatusLabel, getECStatusLabel } from './utils/summary-utils';
 
-type OutputTabProps = {
+export type OutputProps = {
   enterpriseContractPolicies?: EnterpriseContractPolicy[];
   acsImageScanResult?: ACSImageScanResult;
   acsImageCheckResults?: ACSCheckResults;
   acsDeploymentCheckResults?: ACSCheckResults;
 } & ResultsListProps;
 
-const OutputTab: React.FC<OutputTabProps> = ({
+/**
+ * Output component supports EC, ACS policy reports and pipelinerun results.
+ * @param OutputProps
+ * @returns React.ReactNode
+ */
+const Output: React.FC<OutputProps> = ({
   enterpriseContractPolicies = [],
   acsImageCheckResults = {} as ACSCheckResults,
   acsImageScanResult = {} as ACSImageScanResult,
@@ -46,16 +51,16 @@ const OutputTab: React.FC<OutputTabProps> = ({
   return (
     <>
       {showECCard && (
-        <OutputTabCard
+        <OutputCard
           title="Enterprise Contract"
           badge={getECStatusLabel(getEnterpriseContractStatus(enterpriseContractPolicies))}
           isOpen={true}
         >
           <EnterpriseContract enterpriseContractPolicies={enterpriseContractPolicies} />
-        </OutputTabCard>
+        </OutputCard>
       )}
       {showACSCard && (
-        <OutputTabCard
+        <OutputCard
           title="Advanced Cluster Security"
           badge={getACStatusLabel(acsIssuesFound)}
           isOpen={!showECCard}
@@ -65,16 +70,16 @@ const OutputTab: React.FC<OutputTabProps> = ({
             acsImageCheckResults={acsImageCheckResults}
             acsDeploymentCheckResults={acsDeploymentCheckResults}
           />
-        </OutputTabCard>
+        </OutputCard>
       )}
       {results.length > 0 && showOnlyResults ? (
         <ResultsComponent data-testid="ec" />
       ) : results.length > 0 ? (
-        <OutputTabCard data-testid="results-card" title="Others" isOpen={showOnlyResults}>
+        <OutputCard data-testid="results-card" title="Others" isOpen={showOnlyResults}>
           <ResultsComponent />
-        </OutputTabCard>
+        </OutputCard>
       ) : null}
     </>
   );
 };
-export default OutputTab;
+export default Output;

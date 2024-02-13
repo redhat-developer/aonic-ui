@@ -1,16 +1,16 @@
 import '@testing-library/jest-dom';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
-import OutputTabCard from '../OutputTabCard';
+import OutputCard from '../OutputCard';
 
 describe('OutputCard', () => {
   test('should render output card', () => {
-    render(<OutputTabCard title="Output card">Card content</OutputTabCard>);
+    render(<OutputCard title="Output card">Card content</OutputCard>);
 
     screen.getByText('Output card');
   });
 
   test('should render output card', () => {
-    render(<OutputTabCard title="Output card">Card content</OutputTabCard>);
+    render(<OutputCard title="Output card">Card content</OutputCard>);
 
     screen.getByText('Output card');
 

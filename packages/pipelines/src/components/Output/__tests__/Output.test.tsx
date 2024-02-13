@@ -1,21 +1,22 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
+import { RunStatus } from '../../../utils/pipelinerun-utils';
 import {
   acsDeploymentCheck,
   acsImageCheckResults,
   acsImageScanResult,
   mockEnterpriseContractUIData,
 } from '../data';
-import OutputTab from '../OutputTab';
+import Output from '../Output';
 
 describe('OutputTab', () => {
   test('should render OutputTab with enterprise contract', () => {
     render(
-      <OutputTab
+      <Output
         enterpriseContractPolicies={mockEnterpriseContractUIData}
         results={[]}
         pipelineRunName="pipelinerun-1"
-        pipelineRunStatus="Succeeded"
+        pipelineRunStatus={RunStatus.Succeeded}
       />,
     );
 
@@ -28,11 +29,11 @@ describe('OutputTab', () => {
 
   test('should render OutputTab with adavanced cluster security data', () => {
     render(
-      <OutputTab
+      <Output
         acsImageScanResult={acsImageScanResult}
         results={[]}
         pipelineRunName="pipelinerun-1"
-        pipelineRunStatus="Succeeded"
+        pipelineRunStatus={RunStatus.Succeeded}
       />,
     );
 
@@ -43,7 +44,7 @@ describe('OutputTab', () => {
 
   test('should not render issues found badge in adavanced cluster security tab', () => {
     render(
-      <OutputTab
+      <Output
         acsImageScanResult={{
           ...acsImageScanResult,
           result: {
@@ -85,7 +86,7 @@ describe('OutputTab', () => {
         }}
         results={[{ name: 'result-name', value: 'result-value' }]}
         pipelineRunName="pipelinerun-1"
-        pipelineRunStatus="Succeeded"
+        pipelineRunStatus={RunStatus.Succeeded}
       />,
     );
 
@@ -96,17 +97,21 @@ describe('OutputTab', () => {
 
   test('should not render OutputTab with results section', () => {
     render(
-      <OutputTab results={[]} pipelineRunName="pipelinerun-1" pipelineRunStatus="Succeeded" />,
+      <Output
+        results={[]}
+        pipelineRunName="pipelinerun-1"
+        pipelineRunStatus={RunStatus.Succeeded}
+      />,
     );
     expect(screen.queryByTestId('results-table')).not.toBeInTheDocument();
   });
 
   test('should render OutputTab with results section', () => {
     render(
-      <OutputTab
+      <Output
         results={[{ name: 'result-name', value: 'result-value' }]}
         pipelineRunName="pipelinerun-1"
-        pipelineRunStatus="Succeeded"
+        pipelineRunStatus={RunStatus.Succeeded}
       />,
     );
     screen.getByText('result-value');

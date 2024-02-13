@@ -1,5 +1,17 @@
 # @aonic-ui/pipelines
 
+## 1.1.0
+
+### Minor Changes
+
+- e44299e: Added core tekton types
+  Added integration utils, hooks and sample data helpers
+
+### Patch Changes
+
+- db3639d: replace static image repo string with actual image link
+- f18f066: add tab auto selection based on the availability of the tab data
+
 ## 1.0.1
 
 ### Patch Changes

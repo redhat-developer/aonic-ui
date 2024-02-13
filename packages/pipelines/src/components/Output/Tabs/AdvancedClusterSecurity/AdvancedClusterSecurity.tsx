@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Tab, Tabs, TabTitleText } from '@patternfly/react-core';
+import { useFirstLoadedInput } from '../../hooks/useFirstLoadedInput';
+import { SubTab } from '../../Toolbar/types';
 import { ACSCheckResults, ACSImageScanResult } from '../../types';
 import { isEmpty } from '../../utils/helper-utils';
 import ACSContextProvider from './AdvancedClusterSecurityContext';
@@ -27,13 +29,24 @@ const AdvancedClusterSecurity: React.FC<AdvancedClusterSecurityProps> = (acsProp
     [acsImageScanResult, acsImageCheckResults, acsDeploymentCheckResults].filter((a) => !isEmpty(a))
       .length > 0;
 
+  const tabOrder: SubTab[] = [SubTab.imageScan, SubTab.imageCheck, SubTab.deploymentCheck];
+  const firstLoadedTab = useFirstLoadedInput<SubTab>([
+    { name: SubTab.imageScan, value: acsImageScanResult },
+    { name: SubTab.imageCheck, value: acsImageCheckResults },
+    { name: SubTab.deploymentCheck, value: acsDeploymentCheckResults },
+  ]);
+
   if (!showACSTab) {
     return null;
   }
 
   return (
     <ACSContextProvider {...acsProps}>
-      <Tabs defaultActiveKey={0} data-testid="acs-tabs">
+      <Tabs
+        key={firstLoadedTab}
+        defaultActiveKey={tabOrder.indexOf(firstLoadedTab) ?? 0}
+        data-testid="acs-tabs"
+      >
         {!isEmpty(acsImageScanResult) && (
           <Tab eventKey={0} title={<TabTitleText>Image Scan</TabTitleText>}>
             <div style={{ marginTop: 'var(--pf-v5-global--spacer--sm)' }}>

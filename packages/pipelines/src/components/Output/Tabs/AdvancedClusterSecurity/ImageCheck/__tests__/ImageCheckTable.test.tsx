@@ -38,4 +38,20 @@ describe('ImageCheckTable', () => {
       screen.getByTestId('image-check-table');
     });
   });
+
+
+  test('should render the ImageCheckTable even if the results are not available', async () => {
+    render(
+      <ACSContextProvider
+        {...extraProps}
+        acsImageCheckResults={{ summary: acsImageCheckResults.summary } as ACSCheckResults}
+      >
+        <ImageCheckTable />
+      </ACSContextProvider>,
+    );
+
+   await waitFor(() => {
+      screen.getByTestId('image-check-table');
+    });
+  });
 });

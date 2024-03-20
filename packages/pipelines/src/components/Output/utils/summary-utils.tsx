@@ -127,14 +127,14 @@ export const getBreakingChangeStatus = (
       return (
         <>
           <ExclamationTriangleIcon title={status} color={redColor.value} />{' '}
-          <b>{cveSummary?.[status]}</b> violations breaks build
+          <b>{cveSummary?.[status] ?? 0}</b> violations breaks build
         </>
       );
     case ACS_BREAKING_CHANGES.NotBreaking:
       return (
         <>
           <ExclamationTriangleIcon title={status} color={yellowColor.value} />{' '}
-          <b>{cveSummary?.[status]}</b> violations not breaking builds
+          <b>{cveSummary?.[status] ?? 0}</b> violations not breaking builds
         </>
       );
 
@@ -215,8 +215,8 @@ export const SummaryTextAndCount: React.FC<{
 );
 
 export const getCheckSeveritySummary = (data: ACSCheckResults) => ({
-  [ACS_IMAGE_CHECK_SEVERITY.Critical]: data.results?.[0]?.summary?.CRITICAL,
-  [ACS_IMAGE_CHECK_SEVERITY.High]: data.results?.[0]?.summary?.HIGH,
-  [ACS_IMAGE_CHECK_SEVERITY.Medium]: data.results?.[0]?.summary?.MEDIUM,
-  [ACS_IMAGE_CHECK_SEVERITY.Low]: data.results?.[0]?.summary?.LOW,
+  [ACS_IMAGE_CHECK_SEVERITY.Critical]: data.results?.[0]?.summary?.CRITICAL ?? 0,
+  [ACS_IMAGE_CHECK_SEVERITY.High]: data.results?.[0]?.summary?.HIGH ?? 0,
+  [ACS_IMAGE_CHECK_SEVERITY.Medium]: data.results?.[0]?.summary?.MEDIUM ?? 0,
+  [ACS_IMAGE_CHECK_SEVERITY.Low]: data.results?.[0]?.summary?.LOW ?? 0,
 });

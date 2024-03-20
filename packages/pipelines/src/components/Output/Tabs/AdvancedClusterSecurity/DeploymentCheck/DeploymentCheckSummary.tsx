@@ -19,7 +19,7 @@ const DeploymentCheckSummary: React.FC = () => {
   );
 
   const breakingChangesSummary = React.useMemo(
-    () => getBreakingChangeCount(acsDeploymentCheckResults?.results[0]?.violatedPolicies),
+    () => getBreakingChangeCount(acsDeploymentCheckResults?.results?.[0]?.violatedPolicies),
     [acsDeploymentCheckResults],
   );
 

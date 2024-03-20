@@ -18,7 +18,7 @@ const ImageCheckSummary: React.FC = () => {
     [acsImageCheckResults],
   );
   const breakingChangesSummary = React.useMemo(
-    () => getBreakingChangeCount(acsImageCheckResults?.results[0]?.violatedPolicies),
+    () => getBreakingChangeCount(acsImageCheckResults?.results?.[0]?.violatedPolicies),
     [acsImageCheckResults],
   );
 

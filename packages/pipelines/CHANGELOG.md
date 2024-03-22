@@ -1,5 +1,11 @@
 # @aonic-ui/pipelines
 
+## 1.1.1
+
+### Patch Changes
+
+- 96cbcd1: Handle the invalid input for acs table gracefully
+
 ## 1.1.0
 
 ### Minor Changes

@@ -38,8 +38,8 @@ export const filterVulnerabilities = (
     componentFilters = [],
     severityFilters = [],
   } = filters;
-  return !isEmpty(acsImageScanResult)
-    ? acsImageScanResult?.result?.vulnerabilities?.filter(
+  return !isEmpty(acsImageScanResult) && !!acsImageScanResult?.result?.vulnerabilities
+    ? acsImageScanResult.result.vulnerabilities?.filter(
         (vul: Vulnerability) =>
           filterByStatus(vul, statusFilters) &&
           filterData(vul, cveIdFilters, 'cveId') &&

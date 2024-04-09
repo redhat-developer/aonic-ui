@@ -14,10 +14,10 @@ const ImageScanSummary: React.FC = () => {
   const { acsImageScanResult } = useACSContext();
 
   const getResultsSummary = (data: ACSImageScanResult) => ({
-    Critical: data.result.summary.CRITICAL,
-    Important: data.result.summary.IMPORTANT,
-    Moderate: data.result.summary.MODERATE,
-    Low: data.result.summary.LOW,
+    Critical: data.result?.summary?.CRITICAL ?? 0,
+    Important: data.result?.summary?.IMPORTANT ?? 0,
+    Moderate: data.result?.summary?.MODERATE ?? 0,
+    Low: data.result?.summary?.LOW ?? 0,
   });
 
   const resultSummary = React.useMemo(
@@ -96,7 +96,7 @@ const ImageScanSummary: React.FC = () => {
                   <SummaryTextAndCount
                     text={getCVEScanResults(
                       ACS_SCAN_RESULTS.Vulnerabilites,
-                      acsImageScanResult.result.summary,
+                      acsImageScanResult.result?.summary,
                     )}
                   />
                 </FlexItem>
@@ -105,7 +105,7 @@ const ImageScanSummary: React.FC = () => {
                     <SummaryTextAndCount
                       text={getCVEScanResults(
                         ACS_SCAN_RESULTS.Components,
-                        acsImageScanResult.result.summary,
+                        acsImageScanResult.result?.summary,
                       )}
                     />
                   </FlexItem>

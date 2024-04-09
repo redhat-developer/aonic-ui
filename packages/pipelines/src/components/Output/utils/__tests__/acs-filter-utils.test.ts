@@ -119,6 +119,25 @@ describe('ACS filter utils', () => {
   });
 
   describe('filterVulnerabilities', () => {
+    test('should return empty array for invalid data', () => {
+      const invalidACSImageScanData = {
+        result: {
+          summary: acsImageScanResult.result.summary,
+        },
+      } as ACSImageScanResult;
+
+      expect(
+        filterVulnerabilities(invalidACSImageScanData, {
+          statusFilters: [ACS_STATUS.Fixable],
+        }),
+      ).toHaveLength(0);
+
+      expect(
+        filterVulnerabilities({} as ACSImageScanResult, {
+          statusFilters: [ACS_STATUS.Fixable],
+        }),
+      ).toHaveLength(0);
+    });
     test('should filter vulnerabilities by status', () => {
       expect(
         filterVulnerabilities(acsImageScanResult, {

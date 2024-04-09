@@ -1,5 +1,11 @@
 # @aonic-ui/pipelines
 
+## 1.1.2
+
+### Patch Changes
+
+- 6718cd3: Handle the invalid data for acs image scan tab
+
 ## 1.1.1
 
 ### Patch Changes

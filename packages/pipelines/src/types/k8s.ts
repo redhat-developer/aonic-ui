@@ -55,6 +55,7 @@ export type MatchExpression = {
 
 export type ObjectMetadata = {
   annotations?: { [key: string]: string };
+  clusterName?: string;
   creationTimestamp?: string;
   deletionGracePeriodSeconds?: number;
   deletionTimestamp?: string;

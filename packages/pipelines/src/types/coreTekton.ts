@@ -15,6 +15,7 @@ type TektonTaskSteps = {
   command?: string[];
   image?: string;
   computeResources?: {}[] | {};
+  resources?: never[] | never;
   env?: { name: string; value: string }[];
   script?: string | string[];
 };
@@ -41,6 +42,7 @@ export type TektonTaskSpec = {
   description?: string;
   steps: TektonTaskSteps[];
   params?: TektonParam[];
+  resources?: TektonResourceGroup<TektonResource>;
   results?: TaskResult[];
   volumes?: {};
   workspaces?: TektonWorkspace[];

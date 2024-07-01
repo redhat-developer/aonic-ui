@@ -1,5 +1,6 @@
 import { TektonParam, TektonTaskSpec, TektonWorkspace } from './coreTekton';
-import { K8sResourceCommon } from './k8s';
+import { K8sResourceCommon, ObjectMetadata } from './k8s';
+import { PipelineRunStatus } from './pipelinerun';
 import { TaskRunStatus } from './taskrun';
 
 export type PipelineTaskRef = {

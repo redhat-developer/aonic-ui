@@ -1,21 +1,23 @@
 import * as React from 'react';
-import { K8sResourceCommon } from '@openshift-console/dynamic-plugin-sdk';
 import { GetNextPage, RecordsList, TektonResultsOptions } from '../types/tekton-results';
+import { FetchUtilsType, K8sResourceCommon } from '../types/k8s';
 
 const defaultGetNextPage: GetNextPage = () => {};
 
 export const useTektonResultsRuns = <Kind extends K8sResourceCommon>(
   getRuns: (
     namespace: string,
+    tektonResultsBaseURL: string,
+    fetchUtils: FetchUtilsType,
     options?: TektonResultsOptions,
     nextPageToken?: string,
     cacheKey?: string,
-    tektonResultsBaseURL?: string,
   ) => Promise<[Kind[], RecordsList, boolean?]>,
   namespace: string,
+  tektonResultsBaseURL: string,
+  fetchUtils: FetchUtilsType,
   options?: TektonResultsOptions,
   cacheKey?: string,
-  tektonResultsBaseURL?: string,
 ): [Kind[], boolean, unknown, GetNextPage] => {
   const [nextPageToken, setNextPageToken] = React.useState<string>();
   const [localCacheKey, setLocalCacheKey] = React.useState(cacheKey);
@@ -44,10 +46,11 @@ export const useTektonResultsRuns = <Kind extends K8sResourceCommon>(
       try {
         const tkPipelineRuns = await getRuns(
           namespace,
+          tektonResultsBaseURL,
+          fetchUtils,
           options,
           nextPageToken,
           localCacheKey,
-          tektonResultsBaseURL,
         );
         if (!disposed) {
           const token = tkPipelineRuns[1].nextPageToken;

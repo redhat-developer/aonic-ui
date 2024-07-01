@@ -1,35 +1,45 @@
 import React from 'react';
-import { getGroupVersionKindForModel } from '@openshift-console/dynamic-plugin-sdk';
 import { PipelineRunKind } from '../types';
 import { GetNextPage, Selector } from '../types/tekton-results';
 import { PipelineRunModel } from '../models';
 import { useRuns } from './useRuns';
+import { getGroupVersionKindForModel } from '../utils/common-utils';
+import { FetchUtilsType } from '../types/k8s';
 
 export const usePipelineRuns = (
+  fetchUtils: FetchUtilsType,
   namespace: string,
+  tektonResultsBaseURL: string,
+  isTektonResultEnabled: boolean,
   options?: {
     selector?: Selector;
     limit?: number;
   },
   cacheKey?: string,
-  isTektonResultEnabled?: boolean,
 ): [PipelineRunKind[], boolean, unknown, GetNextPage] =>
   useRuns<PipelineRunKind>(
+    fetchUtils,
     getGroupVersionKindForModel(PipelineRunModel),
     namespace,
+    tektonResultsBaseURL,
+    isTektonResultEnabled,
     options,
     cacheKey,
-    isTektonResultEnabled,
   );
 
 export const usePipelineRun = (
+  fetchUtils: FetchUtilsType,
   namespace: string,
   pipelineRunName: string,
+  tektonResultsBaseURL: string,
+  isTektonResultEnabled: boolean,
   cacheKey?: string,
-  isTektonResultEnabled?: boolean,
 ): [PipelineRunKind, boolean, string] => {
   const result = usePipelineRuns(
+    fetchUtils,
     namespace,
+    tektonResultsBaseURL,
+    isTektonResultEnabled,
     React.useMemo(
       () => ({
         name: pipelineRunName,
@@ -38,7 +48,6 @@ export const usePipelineRun = (
       [pipelineRunName],
     ),
     cacheKey,
-    isTektonResultEnabled,
   ) as unknown as [PipelineRunKind[], boolean, string];
 
   return React.useMemo(

@@ -1,28 +1,25 @@
 import React from 'react';
 import { differenceBy, uniqBy } from 'lodash-es';
-import {
-  K8sGroupVersionKind,
-  K8sResourceCommon,
-  getGroupVersionKindForModel,
-  useK8sWatchResource,
-} from '@openshift-console/dynamic-plugin-sdk';
 import { PipelineRunModel } from '../models';
 import { GetNextPage, Selector } from '../types/tekton-results';
 import { EQ } from '../utils/tekton-results-utils';
-import { useDeepCompareMemoize } from '../utils/common-utils';
+import { getGroupVersionKindForModel, useDeepCompareMemoize } from '../utils/common-utils';
 import { useTRPipelineRuns } from './useTRPipelineRuns';
 import { useTRTaskRuns } from './useTRTaskRuns';
+import { FetchUtilsType, K8sGroupVersionKind, K8sResourceCommon } from '../types/k8s';
 
 export const useRuns = <Kind extends K8sResourceCommon>(
+  fetchUtils: FetchUtilsType,
   groupVersionKind: K8sGroupVersionKind,
   namespace: string,
+  tektonResultsBaseURL: string,
+  isTektonResultEnabled: boolean,
   options?: {
     selector?: Selector;
     limit?: number;
     name?: string;
   },
   cacheKey?: string,
-  isTektonResultEnabled?: boolean,
 ): [Kind[], boolean, unknown, GetNextPage] => {
   const etcdRunsRef = React.useRef<Kind[]>([]);
   const optionsMemo = useDeepCompareMemoize(options);
@@ -40,8 +37,7 @@ export const useRuns = <Kind extends K8sResourceCommon>(
       name: optionsMemo?.name,
     };
   }, [groupVersionKind, namespace, optionsMemo, isList]);
-  const [resources, loaded, error] = useK8sWatchResource(watchOptions);
-
+  const [resources, loaded, error] = fetchUtils.hooks.useK8sWatchResource(watchOptions);
   // if a pipeline run was removed from etcd, we want to still include it in the return value without re-querying tekton-results
   const etcdRuns = React.useMemo(() => {
     if (!loaded || error) {
@@ -99,12 +95,13 @@ export const useRuns = <Kind extends K8sResourceCommon>(
   const [trResources, trLoaded, trError, trGetNextPage] = isTektonResultEnabled
     ? ((groupVersionKind?.kind === getGroupVersionKindForModel(PipelineRunModel)?.kind
         ? useTRPipelineRuns
-        : useTRTaskRuns)(queryTr ? namespace : '', trOptions, cacheKey) as [
-        [],
-        boolean,
-        unknown,
-        GetNextPage,
-      ])
+        : useTRTaskRuns)(
+        queryTr ? namespace : '',
+        tektonResultsBaseURL,
+        fetchUtils,
+        trOptions,
+        cacheKey,
+      ) as [[], boolean, unknown, GetNextPage])
     : [[], true, undefined, undefined];
 
   return React.useMemo(() => {

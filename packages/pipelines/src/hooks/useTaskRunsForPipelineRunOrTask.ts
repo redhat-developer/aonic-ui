@@ -2,13 +2,16 @@ import React from 'react';
 import { TaskRunKind, TektonResourceLabel } from '../types';
 import { GetNextPage, Selector } from '../types/tekton-results';
 import { useTaskRuns } from './useTaskRuns';
+import { FetchUtilsType } from '../types/k8s';
 
 export const useTaskRunsForPipelineRunOrTask = (
+  fetchUtils: FetchUtilsType,
   namespace: string,
+  tektonResultsBaseURL: string,
+  isTektonResultEnabled: boolean,
   pipelineRunName?: string,
   taskName?: string,
   cacheKey?: string,
-  isTektonResultEnabled?: boolean,
 ): [TaskRunKind[], boolean, unknown, GetNextPage] => {
   const selector = React.useMemo(() => {
     if (pipelineRunName) {
@@ -23,12 +26,14 @@ export const useTaskRunsForPipelineRunOrTask = (
   }, [taskName, pipelineRunName]);
 
   const [taskRuns, loaded, error, getNextPage] = useTaskRuns(
+    fetchUtils,
     namespace,
+    tektonResultsBaseURL,
+    isTektonResultEnabled,
     selector && {
       selector,
     },
     cacheKey,
-    isTektonResultEnabled,
   );
   const sortedTaskRuns = React.useMemo(
     () =>

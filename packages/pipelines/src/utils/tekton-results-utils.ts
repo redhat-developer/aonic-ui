@@ -1,21 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import _ from 'lodash';
-import { K8sResourceCommon, K8sResourceKind, k8sGet } from '@openshift-console/dynamic-plugin-sdk';
 import {
   ALL_NAMESPACES_KEY,
   DELETED_RESOURCE_IN_K8S_ANNOTATION,
   RESOURCE_LOADED_FROM_RESULTS_ANNOTATION,
 } from '../const';
 import { PipelineRunKind, TaskRunKind } from '../types';
-import { consoleProxyFetch, consoleProxyFetchJSON } from './proxy';
+import { DataType, RecordsList, TektonResultsOptions } from '../types/tekton-results';
+import {
+  FetchUtilsType,
+  K8sResourceCommon,
+  K8sResourceKind,
+  MatchExpression,
+  MatchLabels,
+  Selector,
+} from '../types/k8s';
 import { RouteModel, TektonResultModel } from '../models';
-import { DataType, ProxyRequest, RecordsList, TektonResultsOptions } from '../types/tekton-results';
-import { MatchExpression, MatchLabels, Selector } from '../types/k8s';
 
 const MINIMUM_PAGE_SIZE = 5;
 const MAXIMUM_PAGE_SIZE = 10000;
-
-let cachedTektonResultsAPI: string | null = null;
 
 const throw404 = () => {
   // eslint-disable-next-line no-throw-literal
@@ -155,12 +158,16 @@ export const clearCache = () => {
   CACHE = {};
 };
 const InFlightStore: { [key: string]: boolean } = {};
+let cachedTektonResultsAPI: string;
 
-export const getTektonResultsAPIUrl = async () => {
+export const getTektonResultsAPIUrl = async (fetchUtils?: FetchUtilsType) => {
+  if (!fetchUtils?.hooks?.k8sGet) {
+    return cachedTektonResultsAPI;
+  }
   if (cachedTektonResultsAPI) {
     return cachedTektonResultsAPI;
   } else {
-    const cachedTektonResult: K8sResourceKind = await k8sGet({
+    const cachedTektonResult: K8sResourceKind = await fetchUtils?.hooks?.k8sGet({
       model: TektonResultModel,
       name: 'result',
     });
@@ -184,10 +191,12 @@ export const createTektonResultsUrl = async (
   filter?: string,
   options?: TektonResultsOptions,
   nextPageToken?: string,
-  baseURL?: string,
+  tektonResultsBaseURL?: string,
+  fetchUtils?: FetchUtilsType,
 ): Promise<string> => {
-  const tektonResultsAPI = baseURL ? baseURL : await getTektonResultsAPIUrl();
-
+  const tektonResultsAPI = tektonResultsBaseURL
+    ? tektonResultsBaseURL
+    : await getTektonResultsAPIUrl(fetchUtils);
   const namespaceToSearch = namespace && namespace !== ALL_NAMESPACES_KEY ? namespace : '-';
   const URL = `https://${tektonResultsAPI}/apis/results.tekton.dev/v1alpha2/parents/${namespaceToSearch}/results/-/records?${new URLSearchParams(
     {
@@ -217,11 +226,12 @@ export const createTektonResultsUrl = async (
 export const getFilteredRecord = async <R extends K8sResourceCommon>(
   namespace: string,
   dataType: DataType,
+  tektonResultsBaseURL: string,
+  fetchUtils: FetchUtilsType,
   filter?: string,
   options?: TektonResultsOptions,
   nextPageToken?: string,
   cacheKey?: string,
-  tektonResultsBaseURL?: string,
 ): Promise<[R[], RecordsList, boolean?]> => {
   if (cacheKey) {
     const result = CACHE[cacheKey];
@@ -249,12 +259,15 @@ export const getFilteredRecord = async <R extends K8sResourceCommon>(
         options,
         nextPageToken,
         tektonResultsBaseURL,
+        fetchUtils,
       );
-      let list: RecordsList = await consoleProxyFetchJSON({
-        url,
-        method: 'GET',
-        allowInsecure: true,
-      });
+      let list: RecordsList = fetchUtils?.resourceFetchers?.consoleProxyFetchJSON
+        ? await fetchUtils?.resourceFetchers?.consoleProxyFetchJSON({
+            url,
+            method: 'GET',
+            allowInsecure: true,
+          })
+        : await fetchUtils?.resourceFetchers?.commonFetchJson(url);
       if (options?.limit && options?.limit >= 0) {
         list = {
           nextPageToken: undefined,
@@ -287,66 +300,89 @@ export const getFilteredRecord = async <R extends K8sResourceCommon>(
 const getFilteredPipelineRuns = (
   namespace: string,
   filter: string,
+  tektonResultsBaseURL: string,
+  fetchUtils: FetchUtilsType,
   options?: TektonResultsOptions,
   nextPageToken?: string,
   cacheKey?: string,
-  tektonResultsBaseURL?: string,
 ) =>
   getFilteredRecord<PipelineRunKind>(
     namespace,
     DataType.PipelineRun,
+    tektonResultsBaseURL,
+    fetchUtils,
     filter,
     options,
     nextPageToken,
     cacheKey,
-    tektonResultsBaseURL,
   );
 
 const getFilteredTaskRuns = (
   namespace: string,
   filter: string,
+  tektonResultsBaseURL: string,
+  fetchUtils: FetchUtilsType,
   options?: TektonResultsOptions,
   nextPageToken?: string,
   cacheKey?: string,
-  tektonResultsBaseURL?: string,
 ) =>
   getFilteredRecord<TaskRunKind>(
     namespace,
     DataType.TaskRun,
+    tektonResultsBaseURL,
+    fetchUtils,
     filter,
     options,
     nextPageToken,
     cacheKey,
-    tektonResultsBaseURL,
   );
 
 export const getPipelineRuns = (
   namespace: string,
+  tektonResultsBaseURL: string,
+  fetchUtils: FetchUtilsType,
   options?: TektonResultsOptions,
   nextPageToken?: string,
   // supply a cacheKey only if the PipelineRun is complete and response will never change in the future
   cacheKey?: string,
-  tektonResultsBaseURL?: string,
-) => getFilteredPipelineRuns(namespace, '', options, nextPageToken, cacheKey, tektonResultsBaseURL);
+) =>
+  getFilteredPipelineRuns(
+    namespace,
+    '',
+    tektonResultsBaseURL,
+    fetchUtils,
+    options,
+    nextPageToken,
+    cacheKey,
+  );
 
 export const getTaskRuns = (
   namespace: string,
+  tektonResultsBaseURL: string,
+  fetchUtils: FetchUtilsType,
   options?: TektonResultsOptions,
   nextPageToken?: string,
   // supply a cacheKey only if the TaskRun is complete and response will never change in the future
   cacheKey?: string,
-  tektonResultsBaseURL?: string,
-) => getFilteredTaskRuns(namespace, '', options, nextPageToken, cacheKey, tektonResultsBaseURL);
+) =>
+  getFilteredTaskRuns(
+    namespace,
+    '',
+    tektonResultsBaseURL,
+    fetchUtils,
+    options,
+    nextPageToken,
+    cacheKey,
+  );
 
 export const createTektonResultsSummaryUrl = async (
   namespace: string,
+  tektonResultsBaseURL: string,
   options?: TektonResultsOptions,
   nextPageToken?: string,
-  baseURL?: string,
 ): Promise<string> => {
-  const tektonResultsAPI = baseURL ? baseURL : await getTektonResultsAPIUrl();
   const namespaceToSearch = namespace && namespace !== ALL_NAMESPACES_KEY ? namespace : '-';
-  const URL = `https://${tektonResultsAPI}/apis/results.tekton.dev/v1alpha2/parents/${namespaceToSearch}/results/-/records/summary?${new URLSearchParams(
+  const URL = `https://${tektonResultsBaseURL}/apis/results.tekton.dev/v1alpha2/parents/${namespaceToSearch}/results/-/records/summary?${new URLSearchParams(
     {
       summary: `${options?.summary}`,
       ...(options?.groupBy ? { group_by: `${options.groupBy}` } : {}),
@@ -372,61 +408,48 @@ export const createTektonResultsSummaryUrl = async (
   return URL;
 };
 
-const isJSONString = (str: string): boolean => {
-  try {
-    JSON.parse(str);
-  } catch (e) {
-    return false;
-  }
-  return true;
-};
-
-export const consoleProxyFetchLog = <T>(proxyRequest: ProxyRequest): Promise<T> => {
-  return consoleProxyFetch(proxyRequest).then((response) => {
-    return isJSONString(response.body) ? JSON.parse(response.body) : response.body;
-  });
-};
-
-export const getTRURLHost = async () => {
-  const tektonResult: K8sResourceKind = await k8sGet({
-    model: TektonResultModel,
-    name: 'result',
-  });
-  const targetNamespace = tektonResult?.spec?.targetNamespace;
-  const route: K8sResourceKind = await k8sGet({
-    model: RouteModel,
-    name: 'tekton-results-api-service',
-    ns: targetNamespace,
-  });
-  return route!?.spec!.host;
-};
-
-const getLog = async (taskRunPath: string, baseURL?: string) => {
-  const tektonResultsAPI = baseURL ? baseURL : await getTektonResultsAPIUrl();
+const getLog = async (
+  taskRunPath: string,
+  tektonResultsBaseURL: string,
+  fetchUtils: FetchUtilsType,
+) => {
+  const tektonResultsAPI = tektonResultsBaseURL
+    ? tektonResultsBaseURL
+    : await getTektonResultsAPIUrl(fetchUtils);
   const url = `https://${tektonResultsAPI}/apis/results.tekton.dev/v1alpha2/parents/${taskRunPath.replace(
     '/records/',
     '/logs/',
   )}`;
-  return consoleProxyFetchLog({ url, method: 'GET', allowInsecure: true });
+  return fetchUtils?.resourceFetchers?.consoleProxyFetchLog
+    ? await fetchUtils?.resourceFetchers?.consoleProxyFetchLog({
+        url,
+        method: 'GET',
+        allowInsecure: true,
+      })
+    : fetchUtils.resourceFetchers.commonFetchText(url);
 };
 
 export const getTaskRunLog = (
   namespace: string,
   taskRunName: string,
-  tektonResultsBaseURL?: string,
+  tektonResultsBaseURL: string,
+  fetchUtils: FetchUtilsType,
 ): Promise<string> =>
   getFilteredRecord<any>(
     namespace,
     DataType.Log,
+    tektonResultsBaseURL,
+    fetchUtils,
     AND(EQ(`data.spec.resource.kind`, 'TaskRun'), EQ(`data.spec.resource.name`, taskRunName)),
     { limit: 1 },
     undefined,
     undefined,
-    tektonResultsBaseURL,
   ).then((x) =>
     x?.[1]?.records.length > 0
-      ? getLog(x?.[1]?.records[0].name).then((response: unknown) => {
-          return response as string;
-        })
+      ? getLog(x?.[1]?.records[0].name, tektonResultsBaseURL, fetchUtils).then(
+          (response: unknown) => {
+            return response as string;
+          },
+        )
       : throw404(),
   );

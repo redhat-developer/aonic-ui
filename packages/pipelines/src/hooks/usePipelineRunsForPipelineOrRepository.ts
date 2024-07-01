@@ -3,12 +3,15 @@ import { PipelineRunKind } from '../types';
 import { GetNextPage, Selector } from '../types/tekton-results';
 import { RepositoryFields, RepositoryLabels } from '../types/repository';
 import { usePipelineRuns } from './usePipelineRuns';
+import { FetchUtilsType } from '../types/k8s';
 
 export const usePipelineRunsForPipelineOrRepository = (
+  fetchUtils: FetchUtilsType,
   ns: string,
+  tektonResultsBaseURL: string,
+  isTektonResultEnabled: boolean,
   options?: { name: string; kind: string },
   cacheKey?: string,
-  isTektonResultEnabled?: boolean,
 ): [PipelineRunKind[], boolean, unknown, GetNextPage] => {
   const selector: Selector = React.useMemo(() => {
     if (options?.kind === 'Pipeline') {
@@ -25,12 +28,14 @@ export const usePipelineRunsForPipelineOrRepository = (
   }, [options?.kind, options?.name]);
 
   const [pipelineRuns, loaded, error, getNextPage] = usePipelineRuns(
+    fetchUtils,
     ns,
+    tektonResultsBaseURL,
+    isTektonResultEnabled,
     selector && {
       selector,
     },
     cacheKey,
-    isTektonResultEnabled,
   );
 
   return React.useMemo(

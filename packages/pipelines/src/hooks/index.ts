@@ -3,3 +3,8 @@ export * from './useRuns';
 export * from './useTRTaskRunLog';
 export * from './useTaskRuns';
 export * from './useTektonResultsRuns';
+export * from './usePipelineRunsForPipelineOrRepository';
+export * from './useTaskRunsForPipelineRunOrTask';
+export * from './useTRPipelineRuns';
+export * from './useTRTaskRuns';
+export * from '../hooks';

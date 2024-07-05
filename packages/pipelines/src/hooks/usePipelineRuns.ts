@@ -4,13 +4,11 @@ import { GetNextPage, Selector } from '../types/tekton-results';
 import { PipelineRunModel } from '../models';
 import { useRuns } from './useRuns';
 import { getGroupVersionKindForModel } from '../utils/common-utils';
-import { FetchUtilsType } from '../types/k8s';
+import { TektonConfiguration } from '../types/k8s';
 
 export const usePipelineRuns = (
-  fetchUtils: FetchUtilsType,
   namespace: string,
-  tektonResultsBaseURL: string,
-  isTektonResultEnabled: boolean,
+  config: TektonConfiguration,
   options?: {
     selector?: Selector;
     limit?: number;
@@ -18,28 +16,22 @@ export const usePipelineRuns = (
   cacheKey?: string,
 ): [PipelineRunKind[], boolean, unknown, GetNextPage] =>
   useRuns<PipelineRunKind>(
-    fetchUtils,
     getGroupVersionKindForModel(PipelineRunModel),
     namespace,
-    tektonResultsBaseURL,
-    isTektonResultEnabled,
+    config,
     options,
     cacheKey,
   );
 
 export const usePipelineRun = (
-  fetchUtils: FetchUtilsType,
   namespace: string,
   pipelineRunName: string,
-  tektonResultsBaseURL: string,
-  isTektonResultEnabled: boolean,
+  config: TektonConfiguration,
   cacheKey?: string,
 ): [PipelineRunKind, boolean, string] => {
   const result = usePipelineRuns(
-    fetchUtils,
     namespace,
-    tektonResultsBaseURL,
-    isTektonResultEnabled,
+    config,
     React.useMemo(
       () => ({
         name: pipelineRunName,

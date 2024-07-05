@@ -259,9 +259,15 @@ export type FetchUtilsType = {
   resourceFetchers: {
     commonFetchText: commonFetchText;
     commonFetchJson: commonFetchJSON;
-    consoleProxyFetchJSON: ConsoleProxyFetchJSON;
-    consoleProxyFetchLog: ConsoleProxyFetchJSON;
+    consoleProxyFetchJSON?: ConsoleProxyFetchJSON;
+    consoleProxyFetchLog?: ConsoleProxyFetchJSON;
   };
+};
+
+export type TektonConfiguration = {
+  fetchUtils: FetchUtilsType;
+  tektonResultsBaseURL: string;
+  isTektonResultEnabled: boolean;
 };
 
 export declare type Never<T> = {

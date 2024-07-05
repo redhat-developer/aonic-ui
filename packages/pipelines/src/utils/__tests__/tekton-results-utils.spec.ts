@@ -1,11 +1,6 @@
 import { DataType, TektonResultsOptions } from '../../types/tekton-results';
 import { createTektonResultsSummaryUrl } from '../tekton-results-utils';
 
-jest.mock('../tekton-results-utils', () => ({
-  ...jest.requireActual('../tekton-results-utils'),
-  getTektonResultsAPIUrl: jest.fn(),
-}));
-
 describe('createTektonResultsSummaryUrl', () => {
   const tektonResultsBaseURL = 'tekton-results.example.com';
 

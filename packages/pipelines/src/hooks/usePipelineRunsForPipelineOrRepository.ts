@@ -3,13 +3,11 @@ import { PipelineRunKind } from '../types';
 import { GetNextPage, Selector } from '../types/tekton-results';
 import { RepositoryFields, RepositoryLabels } from '../types/repository';
 import { usePipelineRuns } from './usePipelineRuns';
-import { FetchUtilsType } from '../types/k8s';
+import { TektonConfiguration } from '../types/k8s';
 
 export const usePipelineRunsForPipelineOrRepository = (
-  fetchUtils: FetchUtilsType,
   ns: string,
-  tektonResultsBaseURL: string,
-  isTektonResultEnabled: boolean,
+  config: TektonConfiguration,
   options?: { name: string; kind: string },
   cacheKey?: string,
 ): [PipelineRunKind[], boolean, unknown, GetNextPage] => {
@@ -28,10 +26,8 @@ export const usePipelineRunsForPipelineOrRepository = (
   }, [options?.kind, options?.name]);
 
   const [pipelineRuns, loaded, error, getNextPage] = usePipelineRuns(
-    fetchUtils,
     ns,
-    tektonResultsBaseURL,
-    isTektonResultEnabled,
+    config,
     selector && {
       selector,
     },

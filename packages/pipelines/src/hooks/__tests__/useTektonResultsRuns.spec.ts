@@ -44,6 +44,7 @@ const mockFetchUtils: FetchUtilsType = {
 
 describe('useTektonResultsRuns', () => {
   const tektonResultsBaseURL = 'https://tekton-results.example.com';
+  const isTektonResultEnabled = true;
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -53,15 +54,17 @@ describe('useTektonResultsRuns', () => {
     const namespace = 'test-namespace';
     const options = { limit: 2 };
     const cacheKey = 'test-cache-key';
-
     mockGetPipelineRuns.mockResolvedValue([mockTRPipelineRuns, { nextPageToken: undefined }]);
 
     const { result } = renderHook(() =>
       useTektonResultsRuns(
         mockGetPipelineRuns,
         namespace,
-        tektonResultsBaseURL,
-        mockFetchUtils,
+        {
+          fetchUtils: mockFetchUtils,
+          tektonResultsBaseURL,
+          isTektonResultEnabled,
+        },
         options,
         cacheKey,
       ),
@@ -87,8 +90,11 @@ describe('useTektonResultsRuns', () => {
       useTektonResultsRuns(
         mockGetPipelineRuns,
         namespace,
-        tektonResultsBaseURL,
-        mockFetchUtils,
+        {
+          fetchUtils: mockFetchUtils,
+          tektonResultsBaseURL,
+          isTektonResultEnabled,
+        },
         options,
         cacheKey,
       ),

@@ -6,14 +6,12 @@ import { EQ } from '../utils/tekton-results-utils';
 import { getGroupVersionKindForModel, useDeepCompareMemoize } from '../utils/common-utils';
 import { useTRPipelineRuns } from './useTRPipelineRuns';
 import { useTRTaskRuns } from './useTRTaskRuns';
-import { FetchUtilsType, K8sGroupVersionKind, K8sResourceCommon } from '../types/k8s';
+import { K8sGroupVersionKind, K8sResourceCommon, TektonConfiguration } from '../types/k8s';
 
 export const useRuns = <Kind extends K8sResourceCommon>(
-  fetchUtils: FetchUtilsType,
   groupVersionKind: K8sGroupVersionKind,
   namespace: string,
-  tektonResultsBaseURL: string,
-  isTektonResultEnabled: boolean,
+  config: TektonConfiguration,
   options?: {
     selector?: Selector;
     limit?: number;
@@ -37,7 +35,7 @@ export const useRuns = <Kind extends K8sResourceCommon>(
       name: optionsMemo?.name,
     };
   }, [groupVersionKind, namespace, optionsMemo, isList]);
-  const [resources, loaded, error] = fetchUtils.hooks.useK8sWatchResource(watchOptions);
+  const [resources, loaded, error] = config.fetchUtils.hooks.useK8sWatchResource(watchOptions);
   // if a pipeline run was removed from etcd, we want to still include it in the return value without re-querying tekton-results
   const etcdRuns = React.useMemo(() => {
     if (!loaded || error) {
@@ -73,7 +71,7 @@ export const useRuns = <Kind extends K8sResourceCommon>(
 
   // Query tekton results if there's no limit or we received less items from etcd than the current limit
   const queryTr =
-    isTektonResultEnabled &&
+    config.isTektonResultEnabled &&
     (!limit ||
       (namespace &&
         ((runs && loaded && optionsMemo?.limit && optionsMemo.limit > runs.length) || error)));
@@ -92,16 +90,15 @@ export const useRuns = <Kind extends K8sResourceCommon>(
   // tekton-results includes items in etcd, therefore options must use the same limit
   // these duplicates will later be de-duped
 
-  const [trResources, trLoaded, trError, trGetNextPage] = isTektonResultEnabled
+  const [trResources, trLoaded, trError, trGetNextPage] = config.isTektonResultEnabled
     ? ((groupVersionKind?.kind === getGroupVersionKindForModel(PipelineRunModel)?.kind
         ? useTRPipelineRuns
-        : useTRTaskRuns)(
-        queryTr ? namespace : '',
-        tektonResultsBaseURL,
-        fetchUtils,
-        trOptions,
-        cacheKey,
-      ) as [[], boolean, unknown, GetNextPage])
+        : useTRTaskRuns)(queryTr ? namespace : '', config, trOptions, cacheKey) as [
+        [],
+        boolean,
+        unknown,
+        GetNextPage,
+      ])
     : [[], true, undefined, undefined];
 
   return React.useMemo(() => {

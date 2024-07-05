@@ -1,12 +1,11 @@
 import React from 'react';
 import { getTaskRunLog } from '../utils/tekton-results-utils';
-import { FetchUtilsType } from '../types/k8s';
+import { TektonConfiguration } from '../types/k8s';
 
 export const useTRTaskRunLog = (
   namespace: string,
   taskRunName: string,
-  tektonResultsBaseURL: string,
-  fetchUtils: FetchUtilsType,
+  config: TektonConfiguration,
 ): [string | null, boolean, unknown] => {
   const [result, setResult] = React.useState<[string | null, boolean, unknown]>([
     null,
@@ -18,7 +17,7 @@ export const useTRTaskRunLog = (
     if (namespace && taskRunName) {
       (async () => {
         try {
-          const log = await getTaskRunLog(namespace, taskRunName, tektonResultsBaseURL, fetchUtils);
+          const log = await getTaskRunLog(namespace, taskRunName, config);
           if (!disposed) {
             setResult([log, true, undefined]);
           }

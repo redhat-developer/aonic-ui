@@ -63,11 +63,13 @@ describe('useRuns', () => {
     mockUseTRPipelineRuns.mockReturnValue([mockTRPipelineRuns, true, null, jest.fn()]);
     const { result: trResult } = renderHook(() =>
       useRuns(
-        mockFetchUtils,
         groupVersionKind,
         namespace,
-        tektonResultsBaseURL,
-        true,
+        {
+          fetchUtils: mockFetchUtils,
+          tektonResultsBaseURL,
+          isTektonResultEnabled: true,
+        },
         undefined,
         cacheKey,
       ),
@@ -88,11 +90,13 @@ describe('useRuns', () => {
 
     const { result: trResult } = renderHook(() =>
       useRuns(
-        mockFetchUtils,
         groupVersionKind,
         namespace,
-        tektonResultsBaseURL,
-        false,
+        {
+          fetchUtils: mockFetchUtils,
+          tektonResultsBaseURL,
+          isTektonResultEnabled: false,
+        },
         undefined,
         cacheKey,
       ),
@@ -118,11 +122,13 @@ describe('useRuns', () => {
 
     const { result: trResult } = renderHook(() =>
       useRuns(
-        mockFetchUtils,
         groupVersionKind,
         namespace,
-        tektonResultsBaseURL,
-        true,
+        {
+          fetchUtils: mockFetchUtils,
+          tektonResultsBaseURL,
+          isTektonResultEnabled: true,
+        },
         undefined,
         cacheKey,
       ),
@@ -143,11 +149,13 @@ describe('useRuns', () => {
 
     const { result: trResult } = renderHook(() =>
       useRuns(
-        mockFetchUtils,
         groupVersionKind,
         namespace,
-        tektonResultsBaseURL,
-        true,
+        {
+          fetchUtils: mockFetchUtils,
+          tektonResultsBaseURL,
+          isTektonResultEnabled: true,
+        },
         undefined,
         cacheKey,
       ),

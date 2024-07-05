@@ -2,13 +2,11 @@ import React from 'react';
 import { TaskRunKind, TektonResourceLabel } from '../types';
 import { GetNextPage, Selector } from '../types/tekton-results';
 import { useTaskRuns } from './useTaskRuns';
-import { FetchUtilsType } from '../types/k8s';
+import { TektonConfiguration } from '../types/k8s';
 
 export const useTaskRunsForPipelineRunOrTask = (
-  fetchUtils: FetchUtilsType,
   namespace: string,
-  tektonResultsBaseURL: string,
-  isTektonResultEnabled: boolean,
+  config: TektonConfiguration,
   pipelineRunName?: string,
   taskName?: string,
   cacheKey?: string,
@@ -26,10 +24,8 @@ export const useTaskRunsForPipelineRunOrTask = (
   }, [taskName, pipelineRunName]);
 
   const [taskRuns, loaded, error, getNextPage] = useTaskRuns(
-    fetchUtils,
     namespace,
-    tektonResultsBaseURL,
-    isTektonResultEnabled,
+    config,
     selector && {
       selector,
     },

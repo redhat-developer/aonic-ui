@@ -4,7 +4,7 @@ import { TaskRunModel } from '../models';
 import { GetNextPage, Selector } from '../types/tekton-results';
 import { useRuns } from './useRuns';
 import { getGroupVersionKindForModel } from '../utils/common-utils';
-import { FetchUtilsType } from '../types/k8s';
+import { TektonConfiguration } from '../types/k8s';
 
 export const getTaskRunsOfPipelineRun = (
   taskRuns: TaskRunKind[],
@@ -16,10 +16,8 @@ export const getTaskRunsOfPipelineRun = (
 };
 
 export const useTaskRuns = (
-  fetchUtils: FetchUtilsType,
   namespace: string,
-  tektonResultsBaseURL: string,
-  isTektonResultEnabled: boolean,
+  config: TektonConfiguration,
   options?: {
     selector?: Selector;
     limit?: number;
@@ -27,28 +25,22 @@ export const useTaskRuns = (
   cacheKey?: string,
 ): [TaskRunKind[], boolean, unknown, GetNextPage] =>
   useRuns<TaskRunKind>(
-    fetchUtils,
     getGroupVersionKindForModel(TaskRunModel),
     namespace,
-    tektonResultsBaseURL,
-    isTektonResultEnabled,
+    config,
     options,
     cacheKey,
   );
 
 export const useTaskRun = (
-  fetchUtils: FetchUtilsType,
   namespace: string,
   taskRunName: string,
-  tektonResultsBaseURL: string,
-  isTektonResultEnabled: boolean,
+  config: TektonConfiguration,
   cacheKey?: string,
 ): [TaskRunKind, boolean, string] => {
   const result = useTaskRuns(
-    fetchUtils,
     namespace,
-    tektonResultsBaseURL,
-    isTektonResultEnabled,
+    config,
     React.useMemo(
       () => ({
         name: taskRunName,

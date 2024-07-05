@@ -64,10 +64,12 @@ describe('useTaskRunsForPipelineRunOrTask', () => {
 
     const { result } = renderHook(() =>
       useTaskRunsForPipelineRunOrTask(
-        mockFetchUtils,
         namespace,
-        tektonResultsBaseURL,
-        isTektonResultEnabled,
+        {
+          fetchUtils: mockFetchUtils,
+          tektonResultsBaseURL,
+          isTektonResultEnabled,
+        },
         pipelineRunName,
         taskName,
         cacheKey,
@@ -75,10 +77,12 @@ describe('useTaskRunsForPipelineRunOrTask', () => {
     );
 
     expect(mockUseTaskRuns).toHaveBeenCalledWith(
-      mockFetchUtils,
       namespace,
-      tektonResultsBaseURL,
-      isTektonResultEnabled,
+      {
+        fetchUtils: mockFetchUtils,
+        tektonResultsBaseURL,
+        isTektonResultEnabled,
+      },
       {
         selector: {
           matchLabels: { 'tekton.dev/pipelineRun': pipelineRunName },
@@ -117,10 +121,12 @@ describe('useTaskRunsForPipelineRunOrTask', () => {
 
     renderHook(() =>
       useTaskRunsForPipelineRunOrTask(
-        mockFetchUtils,
         namespace,
-        tektonResultsBaseURL,
-        isTektonResultEnabled,
+        {
+          fetchUtils: mockFetchUtils,
+          tektonResultsBaseURL,
+          isTektonResultEnabled,
+        },
         undefined,
         taskName,
         cacheKey,
@@ -128,10 +134,12 @@ describe('useTaskRunsForPipelineRunOrTask', () => {
     );
 
     expect(mockUseTaskRuns).toHaveBeenCalledWith(
-      mockFetchUtils,
       namespace,
-      tektonResultsBaseURL,
-      isTektonResultEnabled,
+      {
+        fetchUtils: mockFetchUtils,
+        tektonResultsBaseURL,
+        isTektonResultEnabled,
+      },
       {
         selector: {
           matchLabels: { 'tekton.dev/pipelineTask': taskName },
@@ -150,10 +158,12 @@ describe('useTaskRunsForPipelineRunOrTask', () => {
 
     renderHook(() =>
       useTaskRunsForPipelineRunOrTask(
-        mockFetchUtils,
         namespace,
-        tektonResultsBaseURL,
-        isTektonResultEnabled,
+        {
+          fetchUtils: mockFetchUtils,
+          tektonResultsBaseURL,
+          isTektonResultEnabled,
+        },
         undefined,
         undefined,
         cacheKey,
@@ -161,10 +171,12 @@ describe('useTaskRunsForPipelineRunOrTask', () => {
     );
 
     expect(mockUseTaskRuns).toHaveBeenCalledWith(
-      mockFetchUtils,
       namespace,
-      tektonResultsBaseURL,
-      isTektonResultEnabled,
+      {
+        fetchUtils: mockFetchUtils,
+        tektonResultsBaseURL,
+        isTektonResultEnabled,
+      },
       undefined,
       cacheKey,
     );
@@ -177,19 +189,20 @@ describe('useTaskRunsForPipelineRunOrTask', () => {
     mockUseTaskRuns.mockReturnValue([testTaskRuns, true, null, jest.fn()]);
 
     renderHook(() =>
-      useTaskRunsForPipelineRunOrTask(
-        mockFetchUtils,
-        namespace,
+      useTaskRunsForPipelineRunOrTask(namespace, {
+        fetchUtils: mockFetchUtils,
         tektonResultsBaseURL,
         isTektonResultEnabled,
-      ),
+      }),
     );
 
     expect(mockUseTaskRuns).toHaveBeenCalledWith(
-      mockFetchUtils,
       namespace,
-      tektonResultsBaseURL,
-      isTektonResultEnabled,
+      {
+        fetchUtils: mockFetchUtils,
+        tektonResultsBaseURL,
+        isTektonResultEnabled,
+      },
       undefined,
       undefined,
     );

@@ -63,20 +63,24 @@ describe('usePipelineRunsForPipelineOrRepository', () => {
 
     renderHook(() =>
       usePipelineRunsForPipelineOrRepository(
-        mockFetchUtils,
         namespace,
-        tektonResultsBaseURL,
-        isTektonResultEnabled,
+        {
+          fetchUtils: mockFetchUtils,
+          tektonResultsBaseURL,
+          isTektonResultEnabled,
+        },
         options,
         cacheKey,
       ),
     );
 
     expect(mockUsePipelineRuns).toHaveBeenCalledWith(
-      mockFetchUtils,
       namespace,
-      tektonResultsBaseURL,
-      isTektonResultEnabled,
+      {
+        fetchUtils: mockFetchUtils,
+        tektonResultsBaseURL,
+        isTektonResultEnabled,
+      },
       { selector },
       cacheKey,
     );
@@ -97,20 +101,24 @@ describe('usePipelineRunsForPipelineOrRepository', () => {
 
     renderHook(() =>
       usePipelineRunsForPipelineOrRepository(
-        mockFetchUtils,
         namespace,
-        tektonResultsBaseURL,
-        isTektonResultEnabled,
+        {
+          fetchUtils: mockFetchUtils,
+          tektonResultsBaseURL,
+          isTektonResultEnabled,
+        },
         options,
         cacheKey,
       ),
     );
 
     expect(mockUsePipelineRuns).toHaveBeenCalledWith(
-      mockFetchUtils,
       namespace,
-      tektonResultsBaseURL,
-      isTektonResultEnabled,
+      {
+        fetchUtils: mockFetchUtils,
+        tektonResultsBaseURL,
+        isTektonResultEnabled,
+      },
       { selector },
       cacheKey,
     );
@@ -127,20 +135,24 @@ describe('usePipelineRunsForPipelineOrRepository', () => {
 
     renderHook(() =>
       usePipelineRunsForPipelineOrRepository(
-        mockFetchUtils,
         namespace,
-        tektonResultsBaseURL,
-        isTektonResultEnabled,
+        {
+          fetchUtils: mockFetchUtils,
+          tektonResultsBaseURL,
+          isTektonResultEnabled,
+        },
         options,
         cacheKey,
       ),
     );
 
     expect(mockUsePipelineRuns).toHaveBeenCalledWith(
-      mockFetchUtils,
       namespace,
-      tektonResultsBaseURL,
-      isTektonResultEnabled,
+      {
+        fetchUtils: mockFetchUtils,
+        tektonResultsBaseURL,
+        isTektonResultEnabled,
+      },
       { selector },
       cacheKey,
     );

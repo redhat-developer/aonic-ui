@@ -1,21 +1,19 @@
 import * as React from 'react';
 import { GetNextPage, RecordsList, TektonResultsOptions } from '../types/tekton-results';
-import { FetchUtilsType, K8sResourceCommon } from '../types/k8s';
+import { K8sResourceCommon, TektonConfiguration } from '../types/k8s';
 
 const defaultGetNextPage: GetNextPage = () => {};
 
 export const useTektonResultsRuns = <Kind extends K8sResourceCommon>(
   getRuns: (
     namespace: string,
-    tektonResultsBaseURL: string,
-    fetchUtils: FetchUtilsType,
+    config: TektonConfiguration,
     options?: TektonResultsOptions,
     nextPageToken?: string,
     cacheKey?: string,
   ) => Promise<[Kind[], RecordsList, boolean?]>,
   namespace: string,
-  tektonResultsBaseURL: string,
-  fetchUtils: FetchUtilsType,
+  config: TektonConfiguration,
   options?: TektonResultsOptions,
   cacheKey?: string,
 ): [Kind[], boolean, unknown, GetNextPage] => {
@@ -46,8 +44,7 @@ export const useTektonResultsRuns = <Kind extends K8sResourceCommon>(
       try {
         const tkPipelineRuns = await getRuns(
           namespace,
-          tektonResultsBaseURL,
-          fetchUtils,
+          config,
           options,
           nextPageToken,
           localCacheKey,

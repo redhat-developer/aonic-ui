@@ -6,8 +6,6 @@ import {
   EmptyStateActions,
   EmptyStateBody,
   EmptyStateFooter,
-  EmptyStateHeader,
-  EmptyStateIcon,
   EmptyStateVariant,
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons/dist/js/icons';
@@ -17,12 +15,7 @@ const FilteredEmptyState: React.FC<{
 }> = ({ onClearAllFilters }) => {
   return (
     <Bullseye data-testid="table-empty-state">
-      <EmptyState variant={EmptyStateVariant.sm}>
-        <EmptyStateHeader
-          icon={<EmptyStateIcon icon={SearchIcon} />}
-          titleText="No results found"
-          headingLevel="h2"
-        />
+      <EmptyState  headingLevel="h2" icon={SearchIcon}  titleText="No results found" variant={EmptyStateVariant.sm}>
         <EmptyStateBody>Clear all filters and try again.</EmptyStateBody>
         <EmptyStateFooter>
           <EmptyStateActions>

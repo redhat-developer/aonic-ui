@@ -48,9 +48,9 @@ const StatusFilter: React.FC<StatusFilterType> = ({ data: statusFilterObj, toggl
 
   return (
     <ToolbarFilter
-      chips={statusFilters}
+      labels={statusFilters}
       categoryName={ToolBarFilterId.status}
-      deleteChip={onDeleteChip}
+      deleteLabel={onDeleteChip}
     >
       <Select
         aria-label="Status"

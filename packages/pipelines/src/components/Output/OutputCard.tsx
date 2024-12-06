@@ -20,7 +20,7 @@ const OutputCard: React.FC<OutputCardProps> = ({ title, badge, isOpen, children 
   const id = title?.replace(/\//g, '-')?.toLowerCase();
 
   return (
-    <Card id={id} isExpanded={tabOpen}>
+    <Card id={id} isExpanded={tabOpen} isPlain>
       <CardHeader
         onExpand={() => setTabOpen((open) => !open)}
         isToggleRightAligned={false}

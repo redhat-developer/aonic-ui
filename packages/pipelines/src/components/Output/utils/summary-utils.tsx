@@ -12,13 +12,13 @@ import {
   ExclamationTriangleIcon,
   ShieldVirusIcon,
 } from '@patternfly/react-icons/dist/js/icons';
-import { global_danger_color_100 as redColor } from '@patternfly/react-tokens/dist/js/global_danger_color_100';
-import { global_palette_blue_300 as lowColor } from '@patternfly/react-tokens/dist/js/global_palette_blue_300';
-import { global_palette_gold_400 as moderateColor } from '@patternfly/react-tokens/dist/js/global_palette_gold_400';
-import { global_palette_orange_300 as importantColor } from '@patternfly/react-tokens/dist/js/global_palette_orange_300';
-import { global_palette_red_200 as criticalColor } from '@patternfly/react-tokens/dist/js/global_palette_red_200';
-import { global_success_color_100 as greenColor } from '@patternfly/react-tokens/dist/js/global_success_color_100';
-import { global_warning_color_100 as yellowColor } from '@patternfly/react-tokens/dist/js/global_warning_color_100';
+import { t_global_color_status_danger_100 as redColor } from '@patternfly/react-tokens/dist/js/t_global_color_status_danger_100';
+import { t_global_color_nonstatus_blue_300 as lowColor } from '@patternfly/react-tokens/dist/js/t_global_color_nonstatus_blue_300';
+import { t_global_color_nonstatus_yellow_300 as moderateColor } from '@patternfly/react-tokens/dist/js/t_global_color_nonstatus_yellow_300';
+import { t_global_color_nonstatus_orangered_300 as importantColor } from '@patternfly/react-tokens/dist/js/t_global_color_nonstatus_orangered_300';
+import { t_global_color_status_danger_100 as criticalColor } from '@patternfly/react-tokens/dist/js/t_global_color_status_danger_100';
+import { t_global_color_status_success_100 as greenColor } from '@patternfly/react-tokens/dist/js/t_global_color_status_success_100';
+import { t_global_color_status_warning_100 as yellowColor } from '@patternfly/react-tokens/dist/js/t_global_color_status_warning_100';
 import {
   ACS_BREAKING_CHANGES,
   ACS_IMAGE_CHECK_SEVERITY,
@@ -126,15 +126,15 @@ export const getBreakingChangeStatus = (
     case ACS_BREAKING_CHANGES.Breaking:
       return (
         <>
-          <ExclamationTriangleIcon title={status} color={redColor.value} />{' '}
-          <b>{cveSummary?.[status] ?? 0}</b> violations breaks build
+          <ExclamationTriangleIcon title={status} color={redColor.value} /> &nbsp;
+          <b>{cveSummary?.[status] ?? 0}</b> &nbsp; violations breaks build
         </>
       );
     case ACS_BREAKING_CHANGES.NotBreaking:
       return (
         <>
-          <ExclamationTriangleIcon title={status} color={yellowColor.value} />{' '}
-          <b>{cveSummary?.[status] ?? 0}</b> violations not breaking builds
+          <ExclamationTriangleIcon title={status} color={yellowColor.value} /> &nbsp;
+          <b>{cveSummary?.[status] ?? 0}</b> &nbsp; violations not breaking builds
         </>
       );
 
@@ -155,15 +155,16 @@ export const getCVEFixableStatus = (
     case ACS_STATUS.Fixable:
       return (
         <>
-          <CheckCircleIcon title={status} color={greenColor.value} /> <b>{cveSummary?.[status]}</b>{' '}
-          vulnerabilities with available fixes
+          <CheckCircleIcon title={status} color={greenColor.value} /> &nbsp;
+          <b>{cveSummary?.[status]}</b>
+          &nbsp; vulnerabilities with available fixes
         </>
       );
     case ACS_STATUS.Unavailable:
       return (
         <>
-          <ExclamationTriangleIcon title={status} color={yellowColor.value} />{' '}
-          <b>{cveSummary?.[status]}</b> vulnerabilities without fixes
+          <ExclamationTriangleIcon title={status} color={yellowColor.value} /> &nbsp;
+          <b>{cveSummary?.[status]}</b> &nbsp; vulnerabilities without fixes
         </>
       );
 
@@ -184,14 +185,15 @@ export const getCVEScanResults = (
     case ACS_SCAN_RESULTS.Vulnerabilites:
       return (
         <>
-          <ShieldVirusIcon title={status} /> <b>{cveSummary?.['TOTAL-VULNERABILITIES']}</b>{' '}
-          vulnerabilities
+          <ShieldVirusIcon title={status} /> &nbsp; <b>{cveSummary?.['TOTAL-VULNERABILITIES']}</b>{' '}
+          &nbsp; vulnerabilities
         </>
       );
     case ACS_SCAN_RESULTS.Components:
       return (
         <>
-          <CubeIcon title={status} /> <b>{cveSummary?.['TOTAL-COMPONENTS']}</b> components
+          <CubeIcon title={status} /> &nbsp; <b>{cveSummary?.['TOTAL-COMPONENTS']}</b> &nbsp;
+          components
         </>
       );
 
@@ -209,7 +211,7 @@ export const SummaryTextAndCount: React.FC<{
   count?: number;
 }> = ({ text, count }): React.ReactNode => (
   <>
-    <span style={{ marginRight: 'var(--pf-v5-global--spacer--sm)' }}>{text}</span>{' '}
+    <span style={{ marginRight: 'var(--pf-t--global--spacer--sm)' }}>{text}</span>{' '}
     {count && <b>{count}</b>}
   </>
 );

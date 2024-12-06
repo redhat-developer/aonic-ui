@@ -8,7 +8,7 @@ import {
   Select,
   SelectList,
   SelectOption,
-  ToolbarChipGroup,
+  ToolbarLabelGroup,
   ToolbarFilter,
 } from '@patternfly/react-core';
 import { useToolbarContext } from './ToolbarContext';
@@ -16,7 +16,7 @@ import { FilterChip } from './types';
 
 export type SelectFilterType = {
   toggleName: string;
-  categoryName: string | ToolbarChipGroup; // Fix me with types
+  categoryName: string | ToolbarLabelGroup;
   data: Record<string, number | string>;
   filters: FilterChip[];
   addFilter: (item: string | FilterChip) => void;
@@ -58,7 +58,7 @@ const SelectFilter: React.FC<SelectFilterType> = ({
   );
 
   return (
-    <ToolbarFilter chips={filters} categoryName={categoryName} deleteChip={onDeleteChip}>
+    <ToolbarFilter labels={filters} categoryName={categoryName} deleteLabel={onDeleteChip}>
       <Select
         aria-label={toggleName}
         toggle-aria-label={`${toggleName} filter menu`}

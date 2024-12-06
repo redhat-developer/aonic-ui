@@ -108,7 +108,7 @@ describe('StatusFilter', () => {
     });
 
     act(() => {
-      fireEvent.click(screen.getByRole('button', { name: 'close key2' }));
+      fireEvent.click(screen.getByRole('button', { name: 'Close key2' }));
     });
 
     waitFor(() => {

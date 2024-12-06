@@ -46,12 +46,12 @@ const CveIdFilter: React.FC<CveIdFilterType> = ({ data: CveIdFilterObj = {} }) =
 
   return (
     <ToolbarFilter
-      chips={cveIdFilters}
+      labels={cveIdFilters}
       categoryName={{
         key: ToolBarFilterId.acsImageScanCveID,
         name: 'CVE ID',
       }}
-      deleteChip={onDeleteChip}
+      deleteLabel={onDeleteChip}
     >
       <Select
         isScrollable

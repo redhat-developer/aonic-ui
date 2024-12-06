@@ -49,7 +49,7 @@ const AdvancedClusterSecurity: React.FC<AdvancedClusterSecurityProps> = (acsProp
       >
         {!isEmpty(acsImageScanResult) && (
           <Tab eventKey={0} title={<TabTitleText>Image Scan</TabTitleText>}>
-            <div style={{ marginTop: 'var(--pf-v5-global--spacer--sm)' }}>
+            <div style={{ marginTop: 'var(--pf-t--global--spacer--sm)' }}>
               <ImageScanTitle />
               <ImageScanSummary />
               <ImageScanToolbar />
@@ -59,7 +59,7 @@ const AdvancedClusterSecurity: React.FC<AdvancedClusterSecurityProps> = (acsProp
         )}
         {!isEmpty(acsImageCheckResults) && (
           <Tab eventKey={1} title={<TabTitleText>Image Check</TabTitleText>}>
-            <div style={{ marginTop: 'var(--pf-v5-global--spacer--sm)' }}>
+            <div style={{ marginTop: 'var(--pf-t--global--spacer--sm)' }}>
               <ImageCheckTitle />
               <ImageCheckSummary />
               <ImageCheckToolbar />
@@ -69,7 +69,7 @@ const AdvancedClusterSecurity: React.FC<AdvancedClusterSecurityProps> = (acsProp
         )}
         {!isEmpty(acsDeploymentCheckResults) && (
           <Tab eventKey={2} title={<TabTitleText>Deployment Check</TabTitleText>}>
-            <div style={{ marginTop: 'var(--pf-v5-global--spacer--sm)' }}>
+            <div style={{ marginTop: 'var(--pf-t--global--spacer--sm)' }}>
               <DeploymentCheckTitle />
               <DeploymentCheckSummary />
               <DeploymentCheckToolbar />

@@ -1,7 +1,7 @@
-import { ToolbarChip, ToolbarChipGroup } from '@patternfly/react-core';
+import { ToolbarLabel, ToolbarLabelGroup } from '@patternfly/react-core';
 
-export type FilterChip = string | ToolbarChip;
-export type FilterChipGroup = string | ToolbarChipGroup;
+export type FilterChip = string | ToolbarLabel;
+export type FilterChipGroup = string | ToolbarLabelGroup;
 
 export enum SubTab {
   imageScan = 'imageScan',

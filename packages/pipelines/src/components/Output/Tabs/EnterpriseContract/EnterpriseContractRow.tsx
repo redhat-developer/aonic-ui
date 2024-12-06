@@ -23,7 +23,7 @@ export const EnterpriseContractRow: React.FC<EnterpriseContractRowType> = ({ dat
 
   return (
     <Tbody isExpanded={rowExpanded} data-testid="row">
-      <Tr data-testid={`ec-row-${rowIndex}`}>
+      <Tr data-testid={`ec-row-${rowIndex}`} isBorderRow>
         <Td
           data-testid={`ec-row-expand-${rowIndex}`}
           expand={{

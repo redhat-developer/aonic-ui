@@ -30,7 +30,10 @@ const ImageScanSummary: React.FC = () => {
   return (
     <Flex flex={{ default: 'flex_1' }} justifyContent={{ default: 'justifyContentSpaceEvenly' }}>
       <FlexItem grow={{ default: 'grow' }}>
-        <Card isCompact style={{ marginBottom: 'var(--pf-v5-global--spacer--sm)' }}>
+        <Card
+          isCompact
+          style={{ borderRadius: 0, marginBottom: 'var(--pf-t--global--spacer--sm)' }}
+        >
           <CardTitle>CVEs by severity</CardTitle>
           <CardBody>
             <Flex justifyContent={{ default: 'justifyContentSpaceBetween' }}>
@@ -67,7 +70,7 @@ const ImageScanSummary: React.FC = () => {
         </Card>
       </FlexItem>
       <FlexItem grow={{ default: 'grow' }}>
-        <Card isCompact>
+        <Card isCompact style={{ borderRadius: 0 }}>
           <CardTitle>CVEs by status</CardTitle>
           <CardBody>
             <Flex justifyContent={{ default: 'justifyContentSpaceBetween' }}>
@@ -87,7 +90,7 @@ const ImageScanSummary: React.FC = () => {
       </FlexItem>
 
       <FlexItem grow={{ default: 'grow' }}>
-        <Card isCompact>
+        <Card isCompact style={{ borderRadius: 0 }}>
           <CardTitle>Total scan results</CardTitle>
           <CardBody>
             <Flex justifyContent={{ default: 'justifyContentSpaceBetween' }}>

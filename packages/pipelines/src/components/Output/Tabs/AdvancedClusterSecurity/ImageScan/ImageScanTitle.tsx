@@ -1,16 +1,16 @@
-import { Button, Text, TextContent, TextVariants } from '@patternfly/react-core';
+import { Button, Content, ContentVariants } from '@patternfly/react-core';
 import { useACSContext } from '../AdvancedClusterSecurityContext';
 
 const ImageScanTitle = () => {
   const { acsImageCheckResults } = useACSContext();
 
   return (
-    <TextContent
+    <Content
       style={{
-        marginBottom: 'var(--pf-v5-global--spacer--sm)',
+        marginBottom: "var(--pf-t--global--spacer--sm)",
       }}
     >
-      <Text component={TextVariants.p}>
+      <Content component={ContentVariants.p}>
         This task returns ACS vulnerability scan results for image:{' '}
         <Button
           variant="link"
@@ -26,8 +26,8 @@ const ImageScanTitle = () => {
         >
           {acsImageCheckResults?.results?.[0]?.metadata?.additionalInfo?.name}
         </Button>
-      </Text>
-    </TextContent>
+      </Content>
+    </Content>
   );
 };
 export default ImageScanTitle;

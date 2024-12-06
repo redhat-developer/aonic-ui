@@ -1,14 +1,14 @@
-import { Button, Text, TextContent, TextVariants } from '@patternfly/react-core';
+import { Button, Content, ContentVariants } from '@patternfly/react-core';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons/dist/js/icons';
 
 const EnterpriseContractTitle = () => {
   return (
-    <TextContent
+    <Content
       style={{
-        marginBottom: 'var(--pf-v5-global--spacer--sm)',
+        marginBottom: "var(--pf-t--global--spacer--sm)",
       }}
     >
-      <Text component={TextVariants.p}>
+      <Content component={ContentVariants.p}>
         Enterprise Contract is a set of tools for verifying the provenance of application snapshots
         and validating them against a clearly defined policy.
         <br />
@@ -18,7 +18,7 @@ const EnterpriseContractTitle = () => {
           isInline
           iconPosition="right"
           icon={
-            <ExternalLinkAltIcon style={{ fontSize: 'var(--pf-v5-global--icon--FontSize--sm)' }} />
+            <ExternalLinkAltIcon style={{ fontSize: "var(--pf-t--global--icon--size--font--xs)" }} />
           }
           component={(props) => (
             <a
@@ -36,7 +36,7 @@ const EnterpriseContractTitle = () => {
           variant="link"
           style={{ padding: 0 }}
           icon={
-            <ExternalLinkAltIcon style={{ fontSize: 'var(--pf-v5-global--icon--FontSize--sm)' }} />
+            <ExternalLinkAltIcon style={{ fontSize: "var(--pf-t--global--icon--size--font--xs)" }} />
           }
           iconPosition="right"
           component={(props) => (
@@ -58,14 +58,14 @@ const EnterpriseContractTitle = () => {
             padding: 0,
           }}
           icon={
-            <ExternalLinkAltIcon style={{ fontSize: 'var(--pf-v5-global--icon--FontSize--sm)' }} />
+            <ExternalLinkAltIcon style={{ fontSize: "var(--pf-t--global--icon--size--font--xs)" }} />
           }
           iconPosition="right"
         >
           Pipeline Policy
         </Button>
-      </Text>
-    </TextContent>
+      </Content>
+    </Content>
   );
 };
 export default EnterpriseContractTitle;

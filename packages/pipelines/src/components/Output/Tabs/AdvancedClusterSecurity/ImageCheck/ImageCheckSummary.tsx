@@ -25,7 +25,10 @@ const ImageCheckSummary: React.FC = () => {
   return (
     <Flex flex={{ default: 'flex_1' }}>
       <FlexItem grow={{ default: 'grow' }}>
-        <Card isCompact style={{ marginBottom: 'var(--pf-v5-global--spacer--sm)' }}>
+        <Card
+          isCompact
+          style={{ borderRadius: 0, marginBottom: 'var(--pf-t--global--spacer--sm)' }}
+        >
           <CardTitle>CVEs by severity</CardTitle>
           <CardBody>
             <Flex justifyContent={{ default: 'justifyContentSpaceBetween' }}>
@@ -62,7 +65,7 @@ const ImageCheckSummary: React.FC = () => {
         </Card>
       </FlexItem>
       <FlexItem grow={{ default: 'grow' }}>
-        <Card isCompact>
+        <Card isCompact style={{ borderRadius: 0 }}>
           <CardTitle>Failing policy checks</CardTitle>
           <CardBody>
             <Flex justifyContent={{ default: 'justifyContentSpaceBetween' }}>

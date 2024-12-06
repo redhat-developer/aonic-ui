@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { debounce, SearchInput, ToolbarChipGroup, ToolbarFilter } from '@patternfly/react-core';
+import { debounce, SearchInput, ToolbarLabelGroup, ToolbarFilter } from '@patternfly/react-core';
 import { useToolbarContext } from './ToolbarContext';
 import { ToolBarFilterId } from './types';
 
 const NameFilter: React.FC<{
   placeholder?: string;
   ariaLabel?: string;
-  categoryName?: string | ToolbarChipGroup;
+  categoryName?: string | ToolbarLabelGroup;
   filter: string;
   updateFilter: (item: string) => void;
 }> = ({ filter: nameFilter, updateFilter, placeholder, ariaLabel, categoryName }) => {
@@ -14,9 +14,9 @@ const NameFilter: React.FC<{
 
   return (
     <ToolbarFilter
-      chips={nameFilter?.length ? ([nameFilter] as string[]) : []}
+      labels={nameFilter?.length ? ([nameFilter] as string[]) : []}
       categoryName={categoryName || ToolBarFilterId.name}
-      deleteChip={onDeleteChip}
+      deleteLabel={onDeleteChip}
     >
       <SearchInput
         name={categoryName ? categoryName.toString() : 'Name'}

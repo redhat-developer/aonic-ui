@@ -6,8 +6,8 @@ import {
   ExternalLinkAltIcon,
 } from '@patternfly/react-icons/dist/js/icons';
 import { Tbody, Td, Tr } from '@patternfly/react-table';
-import { global_success_color_100 as greenColor } from '@patternfly/react-tokens/dist/js/global_success_color_100';
-import { global_warning_color_100 as yellowColor } from '@patternfly/react-tokens/dist/js/global_warning_color_100';
+import { t_global_color_status_success_100 as greenColor } from '@patternfly/react-tokens/dist/js/t_global_color_status_success_100';
+import { t_global_color_status_warning_100 as yellowColor } from '@patternfly/react-tokens/dist/js/t_global_color_status_warning_100';
 import { Vulnerability } from '../../../types';
 import { getSeverityWithIcon } from '../../../utils/summary-utils';
 
@@ -27,7 +27,7 @@ export const ImageScanRow: React.FC<ImageScanType> = ({ data, rowIndex }) => {
             iconPosition="right"
             icon={
               <ExternalLinkAltIcon
-                style={{ fontSize: 'var(--pf-v5-global--icon--FontSize--sm)' }}
+                style={{ fontSize: 'var(--pf-t--global--icon--size--font--xs)' }}
               />
             }
             component={(props) => (

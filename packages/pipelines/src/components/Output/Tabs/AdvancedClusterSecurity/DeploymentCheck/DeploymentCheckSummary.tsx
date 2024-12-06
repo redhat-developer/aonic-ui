@@ -26,7 +26,10 @@ const DeploymentCheckSummary: React.FC = () => {
   return (
     <Flex justifyContent={{ default: 'justifyContentSpaceEvenly' }}>
       <FlexItem grow={{ default: 'grow' }}>
-        <Card isCompact style={{ marginBottom: 'var(--pf-v5-global--spacer--sm)' }}>
+        <Card
+          isCompact
+          style={{ borderRadius: 0, marginBottom: 'var(--pf-t--global--spacer--sm)' }}
+        >
           <CardTitle>Violations by severity</CardTitle>
           <CardBody>
             <Flex justifyContent={{ default: 'justifyContentSpaceBetween' }}>
@@ -63,7 +66,7 @@ const DeploymentCheckSummary: React.FC = () => {
         </Card>
       </FlexItem>
       <FlexItem grow={{ default: 'grow' }}>
-        <Card isCompact>
+        <Card isCompact style={{ borderRadius: 0 }}>
           <CardTitle>Failing policy checks</CardTitle>
           <CardBody>
             <Flex justifyContent={{ default: 'justifyContentSpaceBetween' }}>

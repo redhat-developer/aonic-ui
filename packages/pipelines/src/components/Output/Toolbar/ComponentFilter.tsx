@@ -71,10 +71,10 @@ const ComponentFilter = <T extends object>({
 
   return (
     <ToolbarFilter
-      chips={componentFilters}
+      labels={componentFilters}
       categoryName={ToolBarFilterId.component}
-      deleteChip={onDeleteChip}
-      deleteChipGroup={onDeleteChipComponentGroup}
+      deleteLabel={onDeleteChip}
+      deleteLabelGroup={onDeleteChipComponentGroup}
     >
       <Select
         isScrollable

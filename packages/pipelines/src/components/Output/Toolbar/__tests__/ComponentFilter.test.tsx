@@ -107,7 +107,7 @@ describe('ComponentFilter', () => {
     toggleCheckBoxByValue('component-2');
 
     act(() => {
-      fireEvent.click(screen.getByRole('button', { name: 'Close chip group Component' }));
+      fireEvent.click(screen.getByRole('button', { name: 'Close label group Component' }));
     });
 
     waitFor(() => {

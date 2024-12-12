@@ -1,5 +1,11 @@
 # @aonic-ui/pipelines
 
+## 3.0.0
+
+### Major Changes
+
+- b870828: Upgrade to patternfly v6
+
 ## 2.0.0
 
 ### Major Changes

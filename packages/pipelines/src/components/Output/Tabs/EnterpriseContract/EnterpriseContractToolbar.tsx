@@ -24,7 +24,7 @@ const EnterpriseContractToolbar: React.FC = () => {
           <StatusFilter data={statusFilterObj} />
         </ToolbarItem>
 
-        <ToolbarItem widths={{ default: '300px' }} className="pf-v5-u-ml-0">
+        <ToolbarItem>
           <NameFilter
             filter={nameFilter}
             updateFilter={updateNameFilter}

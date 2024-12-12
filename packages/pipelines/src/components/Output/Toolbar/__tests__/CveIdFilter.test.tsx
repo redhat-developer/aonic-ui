@@ -110,7 +110,7 @@ describe('CveIdFilter', () => {
     await toggleCheckboxByValue('count-2');
 
     act(() => {
-      fireEvent.click(screen.getByRole('button', { name: 'close id2' }));
+      fireEvent.click(screen.getByRole('button', { name: 'Close id2' }));
     });
 
     waitFor(() => {

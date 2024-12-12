@@ -16,8 +16,9 @@ const EnterpriseContractSummary: React.FC = () => {
   return (
     <Card
       style={{
+        borderRadius: 0,
         width: '250px',
-        marginBottom: 'var(--pf-v5-global--spacer--sm)',
+        marginBottom: 'var(--pf-t--global--spacer--sm)',
       }}
       isCompact
     >

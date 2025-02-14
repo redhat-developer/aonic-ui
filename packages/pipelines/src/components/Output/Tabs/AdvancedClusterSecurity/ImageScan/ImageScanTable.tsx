@@ -29,7 +29,7 @@ const ImageScanTable = () => {
   const { onClearAllFilters } = useToolbarContext();
 
   const sortedAcsData = React.useMemo(() => {
-    return filteredacsImageScanResult.sort(
+    return filteredacsImageScanResult?.sort(
       getSortColumnFuntion(COLUMN_ORDER[activeSortIndex], activeSortDirection),
     );
   }, [activeSortDirection, activeSortIndex, filteredacsImageScanResult]);

@@ -1,5 +1,11 @@
 # @aonic-ui/pipelines
 
+## 3.1.0
+
+### Minor Changes
+
+- 1c254ac: Add optional chaining when sorting to prevent errors.
+
 ## 3.0.0
 
 ### Major Changes

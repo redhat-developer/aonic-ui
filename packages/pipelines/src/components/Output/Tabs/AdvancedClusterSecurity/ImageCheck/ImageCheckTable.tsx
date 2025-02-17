@@ -30,7 +30,7 @@ const ImageCheckTable = () => {
 
   const sortedAcsData = React.useMemo(() => {
     return filteredacsImageCheckResults
-      ? filteredacsImageCheckResults.sort(
+      ? filteredacsImageCheckResults?.sort(
           getSortColumnFuntion(COLUMN_ORDER[activeSortIndex], activeSortDirection),
         )
       : [];

@@ -1,5 +1,11 @@
 # @aonic-ui/pipelines
 
+## 3.1.1
+
+### Patch Changes
+
+- 7971cca: Export EC data transformer utility function
+
 ## 3.1.0
 
 ### Minor Changes

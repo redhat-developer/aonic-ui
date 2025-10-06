@@ -1,0 +1,11 @@
+.aonic-task-status-tooltip {
+  display: inline-grid;
+  grid-gap: 0.5rem;
+  text-align: left;
+  grid-template-columns: 1rem auto;
+}
+
+.aonic-task-status-tooltip__legend {
+  height: 1rem;
+  width: 1rem;
+}

@@ -7,7 +7,7 @@ const DeploymentCheckTitle: React.FC = () => {
   return (
     <Content
       style={{
-        marginBottom: "var(--pf-t--global--spacer--sm)",
+        marginBottom: 'var(--pf-t--global--spacer--sm)',
       }}
     >
       <Content component={ContentVariants.p}>

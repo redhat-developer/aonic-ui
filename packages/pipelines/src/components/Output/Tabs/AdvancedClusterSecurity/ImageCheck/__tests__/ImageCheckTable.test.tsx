@@ -39,7 +39,6 @@ describe('ImageCheckTable', () => {
     });
   });
 
-
   test('should render the ImageCheckTable even if the results are not available', async () => {
     render(
       <ACSContextProvider
@@ -50,7 +49,7 @@ describe('ImageCheckTable', () => {
       </ACSContextProvider>,
     );
 
-   await waitFor(() => {
+    await waitFor(() => {
       screen.getByTestId('image-check-table');
     });
   });

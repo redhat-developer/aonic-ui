@@ -20,7 +20,9 @@ export const handleURLs = (value: string): React.ReactNode => {
           variant="link"
           style={{ padding: 0 }}
           icon={
-            <ExternalLinkAltIcon style={{ fontSize: "var(--pf-t--global--icon--size--font--xs)" }} />
+            <ExternalLinkAltIcon
+              style={{ fontSize: 'var(--pf-t--global--icon--size--font--xs)' }}
+            />
           }
           iconPosition="right"
           component={(props) => (

@@ -15,7 +15,12 @@ const FilteredEmptyState: React.FC<{
 }> = ({ onClearAllFilters }) => {
   return (
     <Bullseye data-testid="table-empty-state">
-      <EmptyState  headingLevel="h2" icon={SearchIcon}  titleText="No results found" variant={EmptyStateVariant.sm}>
+      <EmptyState
+        headingLevel="h2"
+        icon={SearchIcon}
+        titleText="No results found"
+        variant={EmptyStateVariant.sm}
+      >
         <EmptyStateBody>Clear all filters and try again.</EmptyStateBody>
         <EmptyStateFooter>
           <EmptyStateActions>

@@ -1,3 +1,3 @@
 export { CamelCaseWrap } from './CamelCaseWrap';
-export { StatusDisplay } from './Status';
+export { Status } from './Status';
 export { StatusIconAndText } from './StatusIconAndText';

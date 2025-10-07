@@ -7,5 +7,3 @@ export * from './usePipelineRunsForPipelineOrRepository';
 export * from './useTaskRunsForPipelineRunOrTask';
 export * from './useTRPipelineRuns';
 export * from './useTRTaskRuns';
-export * from './useDebounceCallback';
-export * from './useKubernetesObjects';

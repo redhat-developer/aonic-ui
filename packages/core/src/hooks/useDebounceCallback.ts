@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { debounce } from 'lodash';
+import { debounce } from 'lodash-es';
 
-import { useDeepCompareMemoize } from '../utils/common-utils';
+import { useDeepCompareMemoize } from './useDeepCompareMemoize';
 
 interface Cancelable {
   cancel(): void;

@@ -37,27 +37,27 @@ const DASH = '-';
 const useStatusStyles = makeStyles((theme) => ({
   success: {
     '& svg': {
-      fill: theme.palette.status.ok,
+      fill: theme.palette.status?.ok || theme.palette.success?.main || '#4caf50',
     },
   },
   running: {
     '& svg': {
-      fill: theme.palette.status.running,
+      fill: theme.palette.status?.running || theme.palette.info?.main || '#2196f3',
     },
   },
   pending: {
     '& svg': {
-      fill: theme.palette.status.pending,
+      fill: theme.palette.status?.pending || theme.palette.warning?.main || '#ff9800',
     },
   },
   warning: {
     '& svg': {
-      fill: theme.palette.status.warning,
+      fill: theme.palette.status?.warning || theme.palette.warning?.main || '#ff9800',
     },
   },
   error: {
     '& svg': {
-      fill: theme.palette.status.error,
+      fill: theme.palette.status?.error || theme.palette.error?.main || '#f44336',
     },
   },
 }));
@@ -116,10 +116,10 @@ const StatusIcon = ({
 
  * @example
  * ```tsx
- * <StatusDisplay status='Warning' />
+ * <Status status='Warning' />
  * ```
  */
-export const StatusDisplay = ({
+export const Status = ({
   status,
   iconOnly,
   className,

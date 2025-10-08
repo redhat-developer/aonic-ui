@@ -10,7 +10,6 @@ const DASH = '-';
 
 const useStyles = makeStyles({
   iconAndText: {
-    alignItems: 'baseline',
     display: 'flex',
     fontWeight: 400,
     fontSize: '14px',

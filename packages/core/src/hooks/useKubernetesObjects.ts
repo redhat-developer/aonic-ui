@@ -10,10 +10,7 @@ import {
   KubernetesRequestBody,
   ObjectsByEntityResponse,
 } from '@backstage/plugin-kubernetes-common';
-import {
-  KubernetesApi,
-  KubernetesAuthProvidersApi,
-} from '@backstage/plugin-kubernetes-react';
+import { KubernetesApi, KubernetesAuthProvidersApi } from '@backstage/plugin-kubernetes-react';
 
 /**
  *

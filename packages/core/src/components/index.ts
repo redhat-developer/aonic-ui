@@ -1,2 +1,4 @@
 export { default as Button } from './Button';
-export { Status, CamelCaseWrap, StatusIconAndText } from './common';
+export { Status } from './Status';
+export { CamelCaseWrap } from './CamelCaseWrap';
+export { StatusIconAndText } from './StatusIconAndText';

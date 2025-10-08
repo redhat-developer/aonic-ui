@@ -5,7 +5,6 @@ import typescript from '@rollup/plugin-typescript';
 import dts from 'rollup-plugin-dts';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
-import { string } from 'rollup-plugin-string';
 
 export default [
   {
@@ -26,10 +25,6 @@ export default [
       peerDepsExternal(),
       resolve(),
       commonjs(),
-      string({
-        include: '**/*.svg',
-        exclude: ['node_modules/**'],
-      }),
       typescript({
         tsconfig: './tsconfig.json',
         exclude: [
@@ -41,10 +36,6 @@ export default [
       }),
       postcss(),
       terser(),
-    ],
-    external: [
-      'react-router-dom',
-      /\.svg$/,
     ],
   },
   {

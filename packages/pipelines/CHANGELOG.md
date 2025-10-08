@@ -1,5 +1,11 @@
 # @aonic-ui/pipelines
 
+## 3.2.0
+
+### Minor Changes
+
+- b9a8571: Added tekton and topology types, utils, hooks & components
+
 ## 3.1.1
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@aonic-ui/pipelines",
-  "version": "3.1.1",
+  "version": "3.2.0",
   "description": "The common library for all the components and utils related to Pipelines.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

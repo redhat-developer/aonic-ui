@@ -58,7 +58,9 @@ export const useRuns = <Kind extends K8sResourceCommon>(
         ]
       : [...etcdRuns];
     value.sort((a, b) =>
-      (b?.metadata?.creationTimestamp ?? '').localeCompare(a?.metadata?.creationTimestamp ?? ''),
+      String(b?.metadata?.creationTimestamp ?? '').localeCompare(
+        String(a?.metadata?.creationTimestamp ?? ''),
+      ),
     );
     if (limit && limit < value.length) {
       value = value.slice(0, limit);

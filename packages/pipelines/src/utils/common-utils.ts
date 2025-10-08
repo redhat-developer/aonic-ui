@@ -1,5 +1,5 @@
 import React from 'react';
-import _ from 'lodash';
+import _ from 'lodash-es';
 import { K8sGroupVersionKind, K8sModel } from '../types/k8s';
 
 export type GetGroupVersionKindForModel = (model: K8sModel) => K8sGroupVersionKind;

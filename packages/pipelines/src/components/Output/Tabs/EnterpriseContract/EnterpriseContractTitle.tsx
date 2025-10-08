@@ -5,7 +5,7 @@ const EnterpriseContractTitle = () => {
   return (
     <Content
       style={{
-        marginBottom: "var(--pf-t--global--spacer--sm)",
+        marginBottom: 'var(--pf-t--global--spacer--sm)',
       }}
     >
       <Content component={ContentVariants.p}>
@@ -18,7 +18,9 @@ const EnterpriseContractTitle = () => {
           isInline
           iconPosition="right"
           icon={
-            <ExternalLinkAltIcon style={{ fontSize: "var(--pf-t--global--icon--size--font--xs)" }} />
+            <ExternalLinkAltIcon
+              style={{ fontSize: 'var(--pf-t--global--icon--size--font--xs)' }}
+            />
           }
           component={(props) => (
             <a
@@ -36,7 +38,9 @@ const EnterpriseContractTitle = () => {
           variant="link"
           style={{ padding: 0 }}
           icon={
-            <ExternalLinkAltIcon style={{ fontSize: "var(--pf-t--global--icon--size--font--xs)" }} />
+            <ExternalLinkAltIcon
+              style={{ fontSize: 'var(--pf-t--global--icon--size--font--xs)' }}
+            />
           }
           iconPosition="right"
           component={(props) => (
@@ -58,7 +62,9 @@ const EnterpriseContractTitle = () => {
             padding: 0,
           }}
           icon={
-            <ExternalLinkAltIcon style={{ fontSize: "var(--pf-t--global--icon--size--font--xs)" }} />
+            <ExternalLinkAltIcon
+              style={{ fontSize: 'var(--pf-t--global--icon--size--font--xs)' }}
+            />
           }
           iconPosition="right"
         >

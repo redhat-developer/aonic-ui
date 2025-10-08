@@ -7,10 +7,11 @@
     "lib": ["dom", "ES2015"],
     "module": "ESNext",
     "resolveJsonModule": true,
-    "target": "es5",
+    "target": "es2015",
     "sourceMap": true,
     "outDir": "dist",
     "allowSyntheticDefaultImports": true,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "downlevelIteration": true
   }
 }

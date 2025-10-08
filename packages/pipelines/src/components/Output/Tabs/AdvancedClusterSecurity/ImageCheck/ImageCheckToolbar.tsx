@@ -23,7 +23,7 @@ const ImageCheckToolbar: React.FC = () => {
 
   return (
     <Toolbar
-      style={{ marginTop: "var(--pf-t--global--spacer--sm)" }}
+      style={{ marginTop: 'var(--pf-t--global--spacer--sm)' }}
       className="pf-m-toggle-group-container"
       clearAllFilters={() => onClearAllFilters(SubTab.imageCheck)}
       data-testid="image-check-toolbar"

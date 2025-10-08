@@ -18,6 +18,8 @@ type TektonTaskSteps = {
   resources?: never[] | never;
   env?: { name: string; value: string }[];
   script?: string | string[];
+  workingDir?: string;
+  volumeMounts?: { name: string; mountPath: string }[];
 };
 
 type TektonTaskStepsV1Beta1 = {
@@ -48,7 +50,7 @@ export type TektonTaskSpec = {
   workspaces?: TektonWorkspace[];
 };
 
-type TektonResourceGroup<ResourceType> = {
+export type TektonResourceGroup<ResourceType> = {
   inputs?: ResourceType[];
   outputs?: ResourceType[];
 };

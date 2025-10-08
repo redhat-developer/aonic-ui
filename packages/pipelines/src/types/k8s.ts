@@ -78,7 +78,7 @@ export type K8sResourceCommon = K8sResourceIdentifier &
     metadata: Partial<{
       annotations: Record<string, string>;
       clusterName: string;
-      creationTimestamp: string;
+      creationTimestamp: string | Date;
       deletionGracePeriodSeconds: number;
       deletionTimestamp: string;
       finalizers: string[];

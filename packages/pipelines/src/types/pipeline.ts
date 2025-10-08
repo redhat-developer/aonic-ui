@@ -1,6 +1,5 @@
-import { TektonParam, TektonTaskSpec, TektonWorkspace } from './coreTekton';
+import { TektonParam, TektonResourceGroup, TektonTaskSpec, TektonWorkspace } from './coreTekton';
 import { K8sResourceCommon, ObjectMetadata } from './k8s';
-import { PipelineRunStatus } from './pipelinerun';
 import { TaskRunStatus } from './taskrun';
 
 export type PipelineTaskRef = {
@@ -45,6 +44,7 @@ export type PipelineResult = {
 export type PipelineTask = {
   name: string;
   params?: PipelineTaskParam[];
+  resources?: TektonResourceGroup<PipelineTaskResource>;
   runAfter?: string[];
   taskRef?: PipelineTaskRef;
   taskSpec?: TektonTaskSpec;

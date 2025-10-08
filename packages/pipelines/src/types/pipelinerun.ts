@@ -1,6 +1,6 @@
-import { TektonResultsRun } from './coreTekton';
+import { TektonResultsRun, TektonTaskSpec } from './coreTekton';
 import { K8sResourceCommon, ObjectMetadata } from './k8s';
-import { PipelineKind, PipelineSpec, WhenExpression } from './pipeline';
+import { PipelineKind, PipelineSpec, PipelineTask, WhenExpression } from './pipeline';
 import { TaskRunStatus } from './taskrun';
 
 export type PLRTaskRunStep = {
@@ -28,7 +28,7 @@ export type PLRTaskRunData = {
   status: TaskRunStatus;
 };
 
-type PLRTaskRuns = {
+export type PLRTaskRuns = {
   [taskRunName: string]: PLRTaskRunData;
 };
 
@@ -155,4 +155,53 @@ export type PipelineRunKind = K8sResourceCommon & {
 
 export type PipelineWithLatest = PipelineKind & {
   latestRun?: PipelineRunKind;
+};
+
+export enum ComputedStatus {
+  All = 'All',
+  Cancelling = 'Cancelling',
+  Succeeded = 'Succeeded',
+  Failed = 'Failed',
+  Running = 'Running',
+  'In Progress' = 'In Progress',
+  FailedToStart = 'FailedToStart',
+  PipelineNotStarted = 'PipelineNotStarted',
+  Skipped = 'Skipped',
+  Cancelled = 'Cancelled',
+  Pending = 'Pending',
+  Idle = 'Idle',
+  Other = 'Other',
+}
+
+export enum TerminatedReasons {
+  Completed = 'Completed',
+}
+
+export type StatusMessage = {
+  message: string;
+  color: string;
+};
+
+export type TaskStatusTypes = {
+  PipelineNotStarted: number;
+  Pending: number;
+  Running: number;
+  Succeeded: number;
+  Cancelled: number;
+  Failed: number;
+  Skipped: number;
+};
+
+export type PipelineTaskWithStatus = PipelineTask & {
+  status: {
+    reason: string;
+    completionTime?: string;
+    conditions: Condition[];
+    podName?: string;
+    startTime?: string;
+    steps?: PLRTaskRunStep[];
+    taskSpec?: TektonTaskSpec;
+    taskResults?: { name: string; value: string }[];
+    duration?: string;
+  };
 };

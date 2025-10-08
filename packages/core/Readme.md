@@ -1,12 +1,8 @@
-
 # @aonic-ui/pipelines
 
 @aonic-core UI component library provides a set of customizable and easy-to-use components for building modern web applications with React.
 
 ## Getting Started
-
-
-
 
 ### Installation
 
@@ -14,9 +10,7 @@
 npm install @aonic-ui/core
 ```
 
-
 ### Usage
-
 
 ```bash
 import { Button } from '@aonic-ui/core';

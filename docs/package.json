@@ -29,7 +29,7 @@
     "eslint": "^8.56.0",
     "eslint-plugin-storybook": "^0.6.15",
     "serve": "^14.2.1",
-    "storybook": "^7.6.8",
+    "storybook": "^7.6.21",
     "typescript": "^5.3.3",
     "vite": "^5.1.8"
   }
